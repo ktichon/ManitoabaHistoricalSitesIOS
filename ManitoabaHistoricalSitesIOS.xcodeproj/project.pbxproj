@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		11C41A852CD9B67000FCDE20 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 11C41A842CD9B67000FCDE20 /* GRDB */; };
 		11C41A872CD9B68800FCDE20 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 11C41A862CD9B68800FCDE20 /* GoogleMaps */; };
+		11CD36702CECF4C400D5231C /* GRDBQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 11CD366F2CECF4C400D5231C /* GRDBQuery */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 			files = (
 				11C41A872CD9B68800FCDE20 /* GoogleMaps in Frameworks */,
 				11C41A852CD9B67000FCDE20 /* GRDB in Frameworks */,
+				11CD36702CECF4C400D5231C /* GRDBQuery in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +123,7 @@
 			packageProductDependencies = (
 				11C41A842CD9B67000FCDE20 /* GRDB */,
 				11C41A862CD9B68800FCDE20 /* GoogleMaps */,
+				11CD366F2CECF4C400D5231C /* GRDBQuery */,
 			);
 			productName = ManitoabaHistoricalSitesIOS;
 			productReference = 11C41A552CD9B56700FCDE20 /* ManitoabaHistoricalSitesIOS.app */;
@@ -207,6 +210,7 @@
 			packageReferences = (
 				11C41A822CD9B5E400FCDE20 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				11C41A832CD9B67000FCDE20 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				11CD366E2CECF4A100D5231C /* XCRemoteSwiftPackageReference "GRDBQuery" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 11C41A562CD9B56700FCDE20 /* Products */;
@@ -589,6 +593,14 @@
 				kind = branch;
 			};
 		};
+		11CD366E2CECF4A100D5231C /* XCRemoteSwiftPackageReference "GRDBQuery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDBQuery.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -601,6 +613,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 11C41A822CD9B5E400FCDE20 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
 			productName = GoogleMaps;
+		};
+		11CD366F2CECF4C400D5231C /* GRDBQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GRDBQuery;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -11,7 +11,8 @@ import SwiftUI
 struct ManitoabaHistoricalSitesIOSApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView()
+                .historicalSiteDatabase(.shared)
         }
     }
 }
