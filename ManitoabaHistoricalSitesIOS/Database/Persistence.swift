@@ -17,7 +17,8 @@ extension HistoricalSiteDatabase {
     private static func makeShared() -> HistoricalSiteDatabase{
         do{
             //gets the resourse from the database
-            let dbPath = Bundle.main.path(forResource: "db", ofType: "sqlite")
+            let dbPath = Bundle.main.path(forResource: "historicalSiteData", ofType: "db")
+            
             
             // Writes are disallowed because resources can not be modified
             var config = Configuration()

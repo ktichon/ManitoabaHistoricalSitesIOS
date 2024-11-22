@@ -15,7 +15,7 @@ struct HistoricalSiteRequest: FetchQueryable   {
     static var defaultValue: [HistoricalSite] { []}
     
     func fetch(_ db: Database) throws -> [HistoricalSite] {
-        try HistoricalSite.fetchAll(<#T##db: Database##Database#>)
+        try HistoricalSite.fetchAll(db)
     }
 
 }
