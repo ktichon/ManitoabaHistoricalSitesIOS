@@ -8,26 +8,12 @@ import GRDB
 import GRDBQuery
 import SwiftUI
 
+//View that creates the observable object MainViewModel from the SwiftUI environment
 struct AppView: View {
+    @Environment(\.historicalSiteDatabase) var database
     
-    @Query(HistoricalSiteRequest())
-    private var allHistoricalSitesTest : [HistoricalSite]
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-            
-            Text("Found \(allHistoricalSitesTest.count) Historical Sites!")
-            
-        }
-        .padding()
-
+        ContentView(database: database)
     }
-}
-
-#Preview {
-    AppView()
 }

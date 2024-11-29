@@ -10,7 +10,7 @@ import GRDB
 import GRDBQuery
 import CoreLocation
 
-struct HistoricalSite: Codable, Hashable, Sendable, FetchableRecord, PersistableRecord {
+struct HistoricalSite: Codable, Hashable, Sendable, FetchableRecord, PersistableRecord, TableRecord{
 
     
     var id: Int
@@ -42,6 +42,11 @@ struct HistoricalSite: Codable, Hashable, Sendable, FetchableRecord, Persistable
             latitude = newValue.latitude
             longitude = newValue.longitude
         }
+    }
+    
+    //Formated version of the address that adds a comma between the municipality and the address if the address is not null
+    func formatedAddress() -> String {
+        return ((address ?? "").isEmpty ? "" : ", ") + (municipality ?? "")
     }
     
     public init()  {

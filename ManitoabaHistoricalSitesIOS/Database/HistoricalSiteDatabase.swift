@@ -8,7 +8,7 @@
 import Foundation
 import GRDB
 
-public struct HistoricalSiteDatabase: Sendable {
+final class HistoricalSiteDatabase: Sendable {
     //The object that actually writes and reads the database
     private let dbWriter: any DatabaseWriter
     
