@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct ManitoabaHistoricalSitesIOSApp: App {
+    //Gets the Map API key before loading the map
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
             AppView()

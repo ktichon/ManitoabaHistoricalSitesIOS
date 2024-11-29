@@ -20,16 +20,19 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+//            Image(systemName: "globe")
+//                .imageScale(.large)
+//                .foregroundStyle(.tint)
+//            Text("Hello, world!")
             
-            if mainViewModel.allHistoricalSites.isEmpty {
+            if mainViewModel.siteMarkers.isEmpty {
                 Text("Loading Sites using the ViewModel")
             } else {
-                Text("Found \(mainViewModel.allHistoricalSites.count) Historical Sites using ViewModel!")
+                MapViewControllerBridge(siteMarkers: $mainViewModel.siteMarkers)
+//                Text("Found \(mainViewModel.allHistoricalSites.count) Historical Sites using ViewModel!")
             }
+            
+            
             
         }
         .padding()
