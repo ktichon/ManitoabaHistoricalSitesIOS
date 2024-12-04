@@ -22,20 +22,20 @@ final class MainViewModel: ObservableObject{
     //@Published var allHistoricalSites: [HistoricalSite] = []
     
     @Published var siteMarkers: [GMSMarker] = []
-    
-    
     @Published var currentSite: HistoricalSite
     
+    
+    
+    
     init( database: HistoricalSiteDatabase) {
+        //Sets the property values
         self.currentSite = HistoricalSite()
         self.database = database
         //let rows = HistoricalSite.fetchAll(database)
         
+        
         //Seperated the fetching of data and the setting of markers.
-        setSiteMarkers(sites: getAllHistroicalSites())
-        
-        
-        
+        setSiteMarkers(sites: getAllHistroicalSites())        
     }
     
     //Gets all the sites from the database
@@ -60,19 +60,21 @@ final class MainViewModel: ObservableObject{
         if sites.isEmpty{
             print("MainViewModel.setSiteMarkers.No Sites Found")
         } else {
+            //Creates a marker for each site and adds them to the list
             siteMarkers = sites.map{ site in
                 let marker = GMSMarker(position: site.position)
                 marker.title = site.name
                 marker.userData = site
-                //Currently using the site url for testing, will use address in future
                 marker.snippet = site.formatedAddress()
-               // marker.snippet = site.siteUrl
                 return marker
             }
         }
-        
-        
     }
+    
+    
+    
+    
+    
     
     
 }

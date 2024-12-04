@@ -46,7 +46,14 @@ struct HistoricalSite: Codable, Hashable, Sendable, FetchableRecord, Persistable
     
     //Formated version of the address that adds a comma between the municipality and the address if the address is not null
     func formatedAddress() -> String {
-        return ((address ?? "").isEmpty ? "" : ", ") + (municipality ?? "")
+        var formattedAddress = ""
+        if let hasAddress = address{
+            if !hasAddress.isEmpty{
+                formattedAddress = "\(hasAddress), "
+            }
+            
+        }
+        return formattedAddress + (municipality ?? "")
     }
     
     public init()  {

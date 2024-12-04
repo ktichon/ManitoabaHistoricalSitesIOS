@@ -35,9 +35,22 @@
 		11C41A6F2CD9B56800FCDE20 /* ManitoabaHistoricalSitesIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManitoabaHistoricalSitesIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		11BF312A2CFE55DB00CBF24E /* Exceptions for "ManitoabaHistoricalSitesIOS" folder in "ManitoabaHistoricalSitesIOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 11C41A542CD9B56700FCDE20 /* ManitoabaHistoricalSitesIOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		11C41A572CD9B56700FCDE20 /* ManitoabaHistoricalSitesIOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				11BF312A2CFE55DB00CBF24E /* Exceptions for "ManitoabaHistoricalSitesIOS" folder in "ManitoabaHistoricalSitesIOS" target */,
+			);
 			path = ManitoabaHistoricalSitesIOS;
 			sourceTree = "<group>";
 		};
@@ -416,6 +429,7 @@
 				DEVELOPMENT_TEAM = 98SBYBV7N8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ManitoabaHistoricalSitesIOS/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Displays sites relative to your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -447,6 +461,7 @@
 				DEVELOPMENT_TEAM = 98SBYBV7N8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ManitoabaHistoricalSitesIOS/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Displays sites relative to your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

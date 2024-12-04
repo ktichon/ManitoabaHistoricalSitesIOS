@@ -12,10 +12,12 @@ import GRDBQuery
 struct ContentView: View {
     
     @ObservedObject private var mainViewModel : MainViewModel
+    @StateObject private var locationManager = LocationManager()
     
 
     init(database : HistoricalSiteDatabase) {
         _mainViewModel = ObservedObject(wrappedValue: MainViewModel(database: database))
+        
     }
     
     var body: some View {
@@ -28,7 +30,9 @@ struct ContentView: View {
             if mainViewModel.siteMarkers.isEmpty {
                 Text("Loading Sites using the ViewModel")
             } else {
-                MapViewControllerBridge(siteMarkers: $mainViewModel.siteMarkers)
+                MapViewControllerBridge(siteMarkers: $mainViewModel.siteMarkers, locationEnable: $locationManager.locationEnabled, userLocation: $locationManager.lastKnownLocation)
+                
+                
 //                Text("Found \(mainViewModel.allHistoricalSites.count) Historical Sites using ViewModel!")
             }
             
