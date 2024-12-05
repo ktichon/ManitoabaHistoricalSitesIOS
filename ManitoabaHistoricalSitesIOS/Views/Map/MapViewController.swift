@@ -14,6 +14,7 @@
 //
 import GoogleMaps
 import UIKit
+import GoogleMapsUtils
 
 class MapViewController: UIViewController {
     
@@ -21,6 +22,8 @@ class MapViewController: UIViewController {
     
     let map =  GMSMapView()
     var isAnimating: Bool = false
+    
+    var clusterManager: GMUClusterManager!
     
 
     override func loadView() {
@@ -44,5 +47,19 @@ class MapViewController: UIViewController {
         
         self.view = map
     }
+    
+    //Sets up the clustering when the view loads
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        
+//        let iconGenerator = GMUDefaultClusterIconGenerator()
+//        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+//        let renderer = GMUDefaultClusterRenderer(mapView: map, clusterIconGenerator: iconGenerator)
+//        
+//        clusterManager = GMUClusterManager(map: map, algorithm: algorithm, renderer: renderer)
+//        clusterManager.setMapDelegate(self)
+//        
+//        
+//    }
     
 }

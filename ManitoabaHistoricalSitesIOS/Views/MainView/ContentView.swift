@@ -30,7 +30,10 @@ struct ContentView: View {
             if mainViewModel.siteMarkers.isEmpty {
                 Text("Loading Sites using the ViewModel")
             } else {
-                MapViewControllerBridge(siteMarkers: $mainViewModel.siteMarkers, locationEnable: $locationManager.locationEnabled, userLocation: $locationManager.lastKnownLocation)
+                MapViewControllerBridge(siteMarkers: $mainViewModel.siteMarkers, locationEnable: $locationManager.locationEnabled,
+                                        newMapLoad: $locationManager.newMapLoad
+                                        
+                )
                 
                 
 //                Text("Found \(mainViewModel.allHistoricalSites.count) Historical Sites using ViewModel!")

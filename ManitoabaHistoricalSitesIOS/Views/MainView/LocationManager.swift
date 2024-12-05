@@ -14,7 +14,12 @@ final class LocationManager: NSObject,CLLocationManagerDelegate, ObservableObjec
     @Published var lastKnownLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 49.9000253, longitude: -97.1386276)
     var manager = CLLocationManager()
     
+    //Used to check if location permissions are enabled
     @Published var locationEnabled : Bool = false
+    
+    //Used to center the camera on the user when the map first loads and has user location
+    @Published var newMapLoad : Bool = true
+
     
     override init(){
         super.init()
