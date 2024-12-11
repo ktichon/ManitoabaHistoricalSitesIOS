@@ -23,6 +23,7 @@ final class MainViewModel: ObservableObject{
     
     @Published var siteMarkers: [GMSMarker] = []
     @Published var currentSite: HistoricalSite
+    @Published var displayState: SiteDisplayState = SiteDisplayState.FullMap
     
     
     
@@ -69,6 +70,13 @@ final class MainViewModel: ObservableObject{
                 return marker
             }
         }
+    }
+    
+    func newSiteSelected(newSite: HistoricalSite) {
+        if newSite != currentSite {
+            currentSite = newSite
+            displayState = SiteDisplayState.HalfSite
+        }        
     }
     
     

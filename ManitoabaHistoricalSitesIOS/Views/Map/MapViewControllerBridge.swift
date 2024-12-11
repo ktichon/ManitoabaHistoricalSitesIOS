@@ -11,7 +11,14 @@ import SwiftUI
 struct MapViewControllerBridge: UIViewControllerRepresentable {
     @Binding var siteMarkers: [GMSMarker]
     @Binding var locationEnable: Bool
+    
+    //Used to center camera on user when the map first loads
     @Binding var newMapLoad: Bool
+    
+    //The bottom padding for the map
+    var mapBottomPadding: CGFloat
+    
+    var newSiteSelected: (HistoricalSite) -> Void
     
     let defaultZoom : Float = 18.0
     
@@ -55,6 +62,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: MapViewController, context: Context) {
         //Sets if user location is enabled
         uiViewController.map.isMyLocationEnabled = locationEnable
+         
         
         if locationEnable {
             //Adds the "go to user location" button
@@ -80,6 +88,10 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
             uiViewController.clusterManager.add(siteMarkers)
             uiViewController.clusterManager.cluster()
         }
+        
+        //Sets the bottom map padding based off the displayState
+        uiViewController.map.padding = UIEdgeInsets(top: 0, left: 0, bottom: mapBottomPadding, right: 0)
+        
         //siteMarkers.forEach{ $0.map = uiViewController.map        }
     }
     
@@ -101,10 +113,20 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             if marker.userData is GMUCluster {
                 print("Cluster was tapped")
+                //If Cluser was clicked, zoom in
+                mapView.animate(toZoom: mapView.camera.zoom + 1)
                 return true
             }
             
-            print("Marker was tapped")
+
+            //If marker was clicked, call newSiteSelected from the ViewModel
+            if let selectedSite = marker.userData as? HistoricalSite {
+                print("Site \(selectedSite.name) was tapped")
+                mapViewControllerBridge.newSiteSelected(selectedSite)
+            } else{
+                print("Unknown marker was tapped")
+            }
+            
             return false
         }
     }
