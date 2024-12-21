@@ -11,15 +11,19 @@ import CoreLocation
 class SiteInfoFormatting {
     
     
-    static func renderHTML(html : String) -> AttributedString{
+    static func renderHTML(html : String, font : Font) -> AttributedString{
+        
+        var formattedAttributedString  = AttributedString(html)
         //try to get attributedString as html
-        if let nsAttributedString = try? NSAttributedString(data: Data(html.utf8), options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
+        if let nsAttributedString = try? NSAttributedString(data: html.data(using: .utf16)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
                    let attributedString = try? AttributedString(nsAttributedString, including: \.uiKit) {
-            return attributedString
-        } else {
-            // fallback...
-            return AttributedString(html)
+            formattedAttributedString = attributedString
         }
+        
+        //Sets the font and text colour to match with the rest of the texts
+        formattedAttributedString.font = font
+        formattedAttributedString.foregroundColor = .label
+        return formattedAttributedString
     }
     
     //Gets the site name from the main type
@@ -69,11 +73,11 @@ class SiteInfoFormatting {
         let distanceInMeters = getDistanceInMeters(coord1: coord1, coord2: coord2)
         
         //When meters is less than 1 km
-        var displayDistance :String = "\(round(distanceInMeters)) m"
+        var displayDistance :String = "\(Int(distanceInMeters)) m"
         
         //When meters is greater than 100 km, round to km
         if distanceInMeters > 100000 {
-            displayDistance = "\(round(distanceInMeters/1000)) km"
+            displayDistance = "\(Int(distanceInMeters/1000)) km"
         }
         //When meters is greater than 10 km, round to 1 decimal
         else if distanceInMeters > 10000{

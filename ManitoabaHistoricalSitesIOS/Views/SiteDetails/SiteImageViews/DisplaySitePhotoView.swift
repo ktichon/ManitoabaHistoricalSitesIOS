@@ -22,10 +22,25 @@ struct DisplaySitePhotoView: View {
 //            Image(systemName: "exclamationmark.octagon")
             
             if photo.info != nil{
-                Text(SiteInfoFormatting.renderHTML(html: photo.info!))
-                    .font(.body)
-                    .padding([.trailing, .leading], 10)
-                    .multilineTextAlignment(.center)
+                //If the device is unable to run the nice pager, we have to set a fixed size
+                if #available(iOS 17.0, *) {
+                    Text(SiteInfoFormatting.renderHTML(html: photo.info!, font: .body))
+                        .padding([.trailing, .leading], 10)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text(SiteInfoFormatting.renderHTML(html: photo.info!, font: .body))
+                        //.padding([.trailing, .leading], 10)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(
+                            maxWidth: (CGFloat(photo.width / 2) + 20)
+                        
+                        )
+                        
+                }
+                
+                    
             }
             
             HStack{

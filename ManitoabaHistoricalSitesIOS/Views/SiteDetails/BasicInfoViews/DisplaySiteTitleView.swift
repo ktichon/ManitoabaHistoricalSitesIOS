@@ -30,6 +30,7 @@ struct DisplaySiteTitleView: View {
                 .bold()
                 .lineLimit(lineLimit)
                 .font(.title)
+                .textSelection(.enabled)
             
             //Insures that text is aligned to left edge
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -41,6 +42,7 @@ struct DisplaySiteTitleView: View {
                     //.fontWeight(.bold)
                     .font(.system(size: 50))
                     .padding(5)
+                    .foregroundStyle(.primary)
                 //Insures that the close button aligns to the top
                     .frame(maxHeight: .infinity, alignment: .top)
             }
@@ -57,7 +59,7 @@ struct DisplaySiteTitleView: View {
         .fixedSize(horizontal: false, vertical: true)
         .overlay(
             RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.accentColor, lineWidth: 5)
+                .stroke(Color.primary, lineWidth: 5)
         )
         .contentShape(Rectangle())
         

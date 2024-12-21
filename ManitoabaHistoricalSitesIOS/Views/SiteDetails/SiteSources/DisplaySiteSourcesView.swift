@@ -24,8 +24,7 @@ struct DisplaySiteSourcesView: View {
                     .padding(sourcePadding)
             } else{
                 ForEach(sourcesList, id: \.self){ source in
-                    Text(SiteInfoFormatting.renderHTML(html: source))
-                        .font(.body)
+                    Text(SiteInfoFormatting.renderHTML(html: source, font: .body))
                         .padding(sourcePadding)
                 }
                 

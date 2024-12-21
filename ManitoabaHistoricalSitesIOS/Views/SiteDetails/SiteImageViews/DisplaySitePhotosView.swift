@@ -43,15 +43,14 @@ struct DisplaySitePhotosView: View {
                 } else {
                     //For all the people not running on ios 17 (like me, with my ios 15 iphone)
                     ScrollView(.horizontal){
-                        LazyHStack{
+                        LazyHStack(spacing: 10){
                             
                             ForEach(Array(sitePhotos.enumerated()), id: \.offset){ index, photo in
                                 DisplaySitePhotoView(
                                     photo: photo,
                                     photoIndex: index + 1,
                                     totalNumberOfPhotos: sitePhotos.count)
-                                .frame(maxWidth: .infinity)
-                                
+                               
                             }
                         }
                     }

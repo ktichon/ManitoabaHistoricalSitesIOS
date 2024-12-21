@@ -13,11 +13,11 @@ struct DisplaySiteAddressInfoView: View {
     var distanceFromUser: String
     var body: some View {
         VStack(alignment: .leading){
-            Text("\(siteTypes.joined(separator: " / ")), \(distanceFromUser)" )
+            Text("\(siteTypes.joined(separator: "/")), \(distanceFromUser)" )
                 .font(.body)
             Text(fullAddress)
                 .font(.body)
-        }
+        }.textSelection(.enabled)
     }
 }
 

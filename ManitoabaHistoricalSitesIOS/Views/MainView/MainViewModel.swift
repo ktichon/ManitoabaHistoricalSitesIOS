@@ -66,18 +66,18 @@ final class MainViewModel: ObservableObject{
             //Creates a marker for each site and adds them to the list
             siteMarkers = sites.map{ site in
                 let marker = GMSMarker(position: site.position)
-                marker.title = site.name
+                //marker.title = site.name
                 marker.userData = site
-                marker.snippet = site.formatedAddress()
+                //marker.snippet = site.formatedAddress()
                 return marker
             }
         }
     }
     
     func newSiteSelected(newSite: HistoricalSite) {
+        displayState = SiteDisplayState.HalfSite
         if newSite != currentSite {
             currentSite = newSite
-            displayState = SiteDisplayState.HalfSite
             
             //Clears the fetched info from the last selected site
             self.siteTypes = []
