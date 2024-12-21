@@ -7,7 +7,6 @@
 
 import SwiftUI
 import GRDB
-import GRDBQuery
 
 struct ContentView: View {
     
@@ -33,7 +32,7 @@ struct ContentView: View {
                 GeometryReader { geometry in
                     //Gets item size using the % of the displayState value and the screen height
                     var displayedItemSize =  (mainViewModel.displayState.rawValue * geometry.size.height)
-                    ZStack{
+                    ZStack(alignment: .bottom){
                         
                         
                         
@@ -42,6 +41,28 @@ struct ContentView: View {
                                                 mapBottomPadding: displayedItemSize,
                                                 newSiteSelected: mainViewModel.newSiteSelected(newSite: )
                         )
+                        
+                        //Show site info
+                        if (mainViewModel.displayState == SiteDisplayState.FullSite  || mainViewModel.displayState == SiteDisplayState.HalfSite){
+                            
+                            DisplaySiteInfoView(
+                                site: mainViewModel.currentSite,
+                                displayState: $mainViewModel.displayState,
+                                siteTypes: mainViewModel.siteTypes,
+                                userLocation: locationManager.lastKnownLocation,
+                                sitePhotos: mainViewModel.sitePhotos,
+                                sourceList: mainViewModel.siteSources)
+                            .frame(height: displayedItemSize)
+                            //Sets the background colour to default
+                            .background(Color(UIColor.secondarySystemGroupedBackground))
+                            
+                            
+                        
+                            
+                            
+                        }
+                        
+                        
                         
                         
                     }
@@ -54,7 +75,6 @@ struct ContentView: View {
             
             
         }
-        .padding()
 
     }
 }

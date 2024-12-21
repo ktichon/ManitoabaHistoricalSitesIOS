@@ -226,7 +226,6 @@
 			packageReferences = (
 				11C41A822CD9B5E400FCDE20 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				11C41A832CD9B67000FCDE20 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
-				11CD366E2CECF4A100D5231C /* XCRemoteSwiftPackageReference "GRDBQuery" */,
 				11BF31702D01F1B100CBF24E /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -448,6 +447,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -480,6 +483,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -494,7 +501,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 98SBYBV7N8;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -513,7 +520,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 98SBYBV7N8;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -531,6 +538,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 98SBYBV7N8;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -548,6 +556,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 98SBYBV7N8;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -622,14 +631,6 @@
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		11CD366E2CECF4A100D5231C /* XCRemoteSwiftPackageReference "GRDBQuery" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/groue/GRDBQuery.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.10.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

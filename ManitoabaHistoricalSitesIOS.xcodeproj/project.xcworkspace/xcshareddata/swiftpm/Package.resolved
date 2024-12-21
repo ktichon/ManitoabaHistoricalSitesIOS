@@ -1,5 +1,5 @@
 {
-  "originHash" : "64c6a05bc730efa25194d101b0156cad16d479ee29de7eb9bf4ea9a16142ae0e",
+  "originHash" : "373e020141dd7281044742f048f4c7aad843115d0aceb278e8080c736091f302",
   "pins" : [
     {
       "identity" : "google-maps-ios-utils",
@@ -17,15 +17,6 @@
       "state" : {
         "branch" : "master",
         "revision" : "3ecb5c54553559217592d21a6d9841becb891b38"
-      }
-    },
-    {
-      "identity" : "grdbquery",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/groue/GRDBQuery.git",
-      "state" : {
-        "revision" : "f279a57b7ba5749c05d347751a2f572f8759a7d2",
-        "version" : "0.10.1"
       }
     },
     {

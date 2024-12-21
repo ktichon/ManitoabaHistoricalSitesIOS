@@ -7,7 +7,6 @@
 
 import Foundation
 import GRDB
-import GRDBQuery
 import CoreLocation
 
 struct HistoricalSite: Codable, Hashable, Sendable, FetchableRecord, PersistableRecord, TableRecord{

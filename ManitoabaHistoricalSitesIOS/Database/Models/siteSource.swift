@@ -8,7 +8,7 @@
 import Foundation
 import GRDB
 
-struct SiteSource : Codable, Hashable, Sendable{
+struct SiteSource : Codable, Hashable, Sendable, FetchableRecord, TableRecord{
     var id: Int
     var siteId: Int
     var info: String

@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import GRDB
-import GRDBQuery
 import GoogleMaps
 
 
@@ -24,6 +23,9 @@ final class MainViewModel: ObservableObject{
     @Published var siteMarkers: [GMSMarker] = []
     @Published var currentSite: HistoricalSite
     @Published var displayState: SiteDisplayState = SiteDisplayState.FullMap
+    @Published var sitePhotos: [SitePhotos] = []
+    @Published var siteSources: [String] = []
+    @Published var siteTypes: [String] = []
     
     
     
@@ -76,7 +78,38 @@ final class MainViewModel: ObservableObject{
         if newSite != currentSite {
             currentSite = newSite
             displayState = SiteDisplayState.HalfSite
-        }        
+            
+            //Clears the fetched info from the last selected site
+            self.siteTypes = []
+            self.sitePhotos = []
+            self.siteSources = []
+            
+            
+            //Fetch the related info for the site from the SitePhotos, SiteSources, and SiteWithType
+            do {
+                
+                try self.database.reader.read{ db in
+                    
+                    //Photos
+                    self.sitePhotos = try SitePhotos.filter(Column("siteId") == newSite.id).fetchAll(db)
+                    
+                    //Sources
+                    let sourcesSQL = "SELECT info FROM siteSource where siteId = ?"
+                    self.siteSources = try String.fetchAll(db, sql:
+                                                            sourcesSQL, arguments:[ newSite.id]  )
+                    
+                    //Site Types
+                    let siteTypesSQL = "SELECT type FROM siteType INNER JOIN siteWithType ON siteWithType.siteTypeId = siteType.id WHERE siteWithType.siteId = ?"
+                    
+                    self.siteTypes = try String.fetchAll(db, sql: siteTypesSQL, arguments: [newSite.id])
+                    
+                }
+            } catch {
+                let nsError = error as NSError
+                print("MainViewModel.newSiteSelected.Error Fetching extra site info: \(nsError.localizedDescription)")
+                
+            }
+        }
     }
     
     
