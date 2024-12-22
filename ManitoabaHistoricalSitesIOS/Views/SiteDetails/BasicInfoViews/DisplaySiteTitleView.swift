@@ -42,7 +42,7 @@ struct DisplaySiteTitleView: View {
                     //.fontWeight(.bold)
                     .font(.system(size: 50))
                     .padding(5)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Color.primary)
                 //Insures that the close button aligns to the top
                     .frame(maxHeight: .infinity, alignment: .top)
             }

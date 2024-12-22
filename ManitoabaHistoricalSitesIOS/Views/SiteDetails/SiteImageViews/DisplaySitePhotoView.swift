@@ -13,33 +13,32 @@ struct DisplaySitePhotoView: View {
     var totalNumberOfPhotos: Int
     var body: some View {
         VStack{
+            AsyncImage(url: URL(string: photo.photoUrl)){ phase in
+                switch phase {
+                
+                case .failure(let error):
+                    let test = error.localizedDescription
+                    Image(systemName: "photo.badge.exclamationmark").resizable()
+                case .success(let image):
+                    image.resizable()
+                default:
+                    Image(systemName: "photo").resizable()
+                
+                }
+            }
+            .padding(5)
+            .frame(
+                width: CGFloat(photo.width / 2),
+                height: CGFloat(photo.height / 2))
             
-            Image(systemName: "photo").resizable()
             //shrink the photo to be half of the normal size
-                .frame(
-                    width: CGFloat(photo.width / 2),
-                    height: CGFloat(photo.height / 2))
+                
 //            Image(systemName: "exclamationmark.octagon")
             
             if photo.info != nil{
-                //If the device is unable to run the nice pager, we have to set a fixed size
-                if #available(iOS 17.0, *) {
-                    Text(SiteInfoFormatting.renderHTML(html: photo.info!, font: .body))
-                        .padding([.trailing, .leading], 10)
-                        .multilineTextAlignment(.center)
-                } else {
-                    Text(SiteInfoFormatting.renderHTML(html: photo.info!, font: .body))
-                        //.padding([.trailing, .leading], 10)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(nil)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(
-                            maxWidth: (CGFloat(photo.width / 2) + 20)
-                        
-                        )
-                        
-                }
-                
+                Text(SiteInfoFormatting.renderHTML(html: photo.info!, font: .body))
+                    .padding([.trailing, .leading], 10)
+                    .multilineTextAlignment(.center)
                     
             }
             

@@ -22,7 +22,7 @@ struct DisplaySitePhotosView: View {
                 //Such as easily showing one item per view
                 if #available(iOS 17.0, *) {
                     ScrollView(.horizontal){
-                        LazyHStack{
+                        HStack{
                             
                             ForEach(Array(sitePhotos.enumerated()), id: \.offset){ index, photo in
                                 DisplaySitePhotoView(
@@ -43,13 +43,21 @@ struct DisplaySitePhotosView: View {
                 } else {
                     //For all the people not running on ios 17 (like me, with my ios 15 iphone)
                     ScrollView(.horizontal){
-                        LazyHStack(spacing: 10){
+                        HStack(spacing: 10){
                             
                             ForEach(Array(sitePhotos.enumerated()), id: \.offset){ index, photo in
                                 DisplaySitePhotoView(
                                     photo: photo,
                                     photoIndex: index + 1,
                                     totalNumberOfPhotos: sitePhotos.count)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .frame(
+                                    maxWidth: (CGFloat(photo.width / 2) + 20)
+                                    
+                                
+                                
+                                )
+                                .padding(10)
                                
                             }
                         }
