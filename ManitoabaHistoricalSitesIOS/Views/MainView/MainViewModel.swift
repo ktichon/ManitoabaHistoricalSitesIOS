@@ -72,9 +72,9 @@ final class MainViewModel: ObservableObject{
                 
                 
                 //Resizes the icon
-                let markerIcon = resizeImage(
+                let markerIcon = MapIconFormatting.resizeImage(
                     //loads image based off of main type
-                    image: UIImage(named: SiteInfoFormatting.getTypeMarkerString(typeId: site.mainType))!,
+                    image: UIImage(named: MapIconFormatting.getTypeMarkerString(typeId: site.mainType))!,
                     scaledToSize: CGSize(width: 55, height: 55))
                 
                 
@@ -125,14 +125,7 @@ final class MainViewModel: ObservableObject{
     }
     
     
-    //Resizes an UIImage
-    func resizeImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return newImage
-    }
+    
     
     
     

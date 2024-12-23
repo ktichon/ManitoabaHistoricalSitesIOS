@@ -52,31 +52,7 @@ class SiteInfoFormatting {
         }
     }
     
-    //Gets the name for the marker icon associated with the main type
-    static func getTypeMarkerString(typeId: Int) -> String{
-        let siteTypeMapping = [
-            //1 is featured site, and no site has that as a main type
-            1: "site_marker",
-            //2 is Museum or Archives
-            2 : "site_marker_museum",
-            //3 is Building
-            3 : "site_marker_building",
-            //4 is Monument
-            4 : "site_marker_monument",
-            //5 is Cemetery
-            5 : "site_marker_cemetery",
-            //6 is Location
-            6 : "site_marker_location",
-            //7 is Other
-            7 : "site_marker_other"
-            
-        ]
-        if let typeColour = siteTypeMapping[typeId]{
-            return typeColour
-        } else{
-            return "site_marker"
-        }
-    }
+    
     
     //turns CLLocationCoordinate2D into CLLocation
     static func turnCoordinateToLocation(coord: CLLocationCoordinate2D) -> CLLocation{
@@ -118,5 +94,7 @@ class SiteInfoFormatting {
         
 
     }
+    
+   
     
 }

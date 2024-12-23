@@ -50,7 +50,8 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         //mapViewController.map.delegate = context.coordinator
         
         
-        let iconGenerator = GMUDefaultClusterIconGenerator()
+        //let iconGenerator = GMUDefaultClusterIconGenerator()
+        let iconGenerator = MapClusterIconGenerator()
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = GMUDefaultClusterRenderer(mapView: mapViewController.map, clusterIconGenerator: iconGenerator)
         
@@ -114,7 +115,8 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
             if marker.userData is GMUCluster {
                 print("Cluster was tapped")
                 //If Cluser was clicked, zoom in
-                mapView.animate(toZoom: mapView.camera.zoom + 1)
+                let cameraUpdate = GMSCameraUpdate.setTarget(marker.position, zoom: mapView.camera.zoom + 1)
+                mapView.animate(with: cameraUpdate)
                 return true
             }
             
