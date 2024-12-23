@@ -17,7 +17,6 @@ struct DisplaySitePhotoView: View {
                 switch phase {
                 
                 case .failure(let error):
-                    let test = error.localizedDescription
                     Image(systemName: "photo.badge.exclamationmark").resizable()
                 case .success(let image):
                     image.resizable()

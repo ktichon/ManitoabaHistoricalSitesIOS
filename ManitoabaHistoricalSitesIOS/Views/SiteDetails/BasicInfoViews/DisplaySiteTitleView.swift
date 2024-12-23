@@ -19,7 +19,7 @@ struct DisplaySiteTitleView: View {
     //will bind later
     @Binding var displayState: SiteDisplayState
     var name: String
-    var paddingBetweenItems: CGFloat = 10
+    var paddingBetweenItems = EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
     var body: some View {
         
         //default align items to center
@@ -53,13 +53,14 @@ struct DisplaySiteTitleView: View {
                 
             
         }
-        //half as much padding vertically as opposed to horizontaly
-        .padding(EdgeInsets(top: paddingBetweenItems / 2, leading: paddingBetweenItems, bottom: paddingBetweenItems / 2, trailing: paddingBetweenItems))
+        .padding(paddingBetweenItems)
+//        //half as much padding vertically as opposed to horizontaly
+//        .padding(EdgeInsets(top: paddingBetweenItems / 2, leading: paddingBetweenItems, bottom: paddingBetweenItems / 2, trailing: paddingBetweenItems))
         //uses a fixed size so I can get the close button to always align to top
         .fixedSize(horizontal: false, vertical: true)
         .overlay(
             RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.primary, lineWidth: 5)
+                .stroke(Color.primary, lineWidth: 2)
         )
         .contentShape(Rectangle())
         

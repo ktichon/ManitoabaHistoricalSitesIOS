@@ -69,11 +69,23 @@ final class MainViewModel: ObservableObject{
                 //marker.title = site.name
                 marker.userData = site
                 //marker.snippet = site.formatedAddress()
+                
+                
+                //Resizes the icon
+                let markerIcon = resizeImage(
+                    //loads image based off of main type
+                    image: UIImage(named: SiteInfoFormatting.getTypeMarkerString(typeId: site.mainType))!,
+                    scaledToSize: CGSize(width: 55, height: 55))
+                
+                
+                marker.icon = markerIcon
+                
                 return marker
             }
         }
     }
     
+    //Called when a new site is selected
     func newSiteSelected(newSite: HistoricalSite) {
         displayState = SiteDisplayState.HalfSite
         if newSite != currentSite {
@@ -110,6 +122,16 @@ final class MainViewModel: ObservableObject{
                 
             }
         }
+    }
+    
+    
+    //Resizes an UIImage
+    func resizeImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
     }
     
     

@@ -27,11 +27,11 @@ struct ContentView: View {
 //            Text("Hello, world!")
             
             if mainViewModel.siteMarkers.isEmpty {
-                Text("Loading Sites ...")
+                ProgressView("Loading all Historic Sites ...")
             } else {
                 GeometryReader { geometry in
                     //Gets item size using the % of the displayState value and the screen height
-                    var displayedItemSize =  (mainViewModel.displayState.rawValue * geometry.size.height)
+                    let displayedItemSize =  (mainViewModel.displayState.rawValue * geometry.size.height)
                     ZStack(alignment: .bottom){
                         
                         

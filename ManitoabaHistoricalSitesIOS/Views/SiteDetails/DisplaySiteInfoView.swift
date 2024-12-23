@@ -17,54 +17,59 @@ struct DisplaySiteInfoView: View {
     var sourceList: [String]
     
     
-    let paddingBetweenItems : CGFloat = 20
+    let paddingBetweenItems = EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
+    
+    //Used to determine who the top view in a scrollView is
+    private static let topScrollID = "topView"
     var body: some View {
         VStack{
             DisplaySiteTitleView(displayState: $displayState, name: site.name, paddingBetweenItems:  paddingBetweenItems)
                 
-            
-            ScrollView{
-                VStack(alignment: .leading){
-                    
-                    
-                    
-                    DisplaySiteAddressInfoView(
-                        //If the siteType array is empty, then use the site.mainType
-                        siteTypes: (
-                            (siteTypes.isEmpty ?
-                             [SiteInfoFormatting.getTypeName(typeId: site.mainType)] :
-                                siteTypes)
-                            ),
-                        fullAddress: site.formatedAddress(),
-                        distanceFromUser: SiteInfoFormatting.getDisplayDistance(coord1: site.position, coord2: userLocation)
-                    )
-                    .padding(paddingBetweenItems)
-                    
-                    DisplaySitePhotosView(
-                        sitePhotos: sitePhotos)
-                    .padding(paddingBetweenItems)
-                    
-                    
-                    //Only display description if it is not null
-                    if site.description != nil{
-                        DisplayDescriptionView(
-                            description: site.description!)
+                
+            ScrollViewReader{ scroll in
+                ScrollView{
+                    VStack(alignment: .leading){
+                        
+                        DisplaySiteAddressInfoView(
+                            //If the siteType array is empty, then use the site.mainType
+                            siteTypes: (
+                                (siteTypes.isEmpty ?
+                                 [SiteInfoFormatting.getTypeName(typeId: site.mainType)] :
+                                    siteTypes)
+                                ),
+                            fullAddress: site.formatedAddress(),
+                            distanceFromUser: SiteInfoFormatting.getDisplayDistance(coord1: site.position, coord2: userLocation)
+                        )
                         .padding(paddingBetweenItems)
-                    }
-                    
-                    DisplaySiteSourcesView(sourcesList: sourceList)
+                        .id(Self.topScrollID)
+                        
+                        DisplaySitePhotosView(
+                            sitePhotos: sitePhotos)
                         .padding(paddingBetweenItems)
                         
-                    
-                    DisplaySiteLinkView(
-                        url: site.siteUrl)
-                    .padding(paddingBetweenItems)
-                    
-                    
-                    
-                    
+                        
+                        //Only display description if it is not null
+                        if site.description != nil{
+                            DisplayDescriptionView(
+                                description: site.description!)
+                            .padding(paddingBetweenItems)
+                        }
+                        
+                        DisplaySiteSourcesView(sourcesList: sourceList)
+                            .padding(paddingBetweenItems)
+                            
+                        
+                        DisplaySiteLinkView(
+                            url: site.siteUrl)
+                        .padding(paddingBetweenItems)
+                    }
+                    .onChange(of: site){_ in
+                        scroll.scrollTo(Self.topScrollID, anchor: .top)
+                    }
                 }
+                
             }
+            
             
             
         }
