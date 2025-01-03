@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11BF31722D01F1B100CBF24E /* GoogleMapsUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 11BF31712D01F1B100CBF24E /* GoogleMapsUtils */; };
+		11C13C922D1A10700055F295 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 11C13C912D1A10700055F295 /* BottomSheet */; };
 		11C41A852CD9B67000FCDE20 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 11C41A842CD9B67000FCDE20 /* GRDB */; };
 		11C41A872CD9B68800FCDE20 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 11C41A862CD9B68800FCDE20 /* GoogleMaps */; };
 /* End PBXBuildFile section */
@@ -30,7 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11C41A552CD9B56700FCDE20 /* ManitoabaHistoricalSitesIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManitoabaHistoricalSitesIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		11C41A552CD9B56700FCDE20 /* MHS Historical Sites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MHS Historical Sites.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C41A652CD9B56800FCDE20 /* ManitoabaHistoricalSitesIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManitoabaHistoricalSitesIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C41A6F2CD9B56800FCDE20 /* ManitoabaHistoricalSitesIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManitoabaHistoricalSitesIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -72,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C41A872CD9B68800FCDE20 /* GoogleMaps in Frameworks */,
+				11C13C922D1A10700055F295 /* BottomSheet in Frameworks */,
 				11C41A852CD9B67000FCDE20 /* GRDB in Frameworks */,
 				11BF31722D01F1B100CBF24E /* GoogleMapsUtils in Frameworks */,
 			);
@@ -107,7 +109,7 @@
 		11C41A562CD9B56700FCDE20 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				11C41A552CD9B56700FCDE20 /* ManitoabaHistoricalSitesIOS.app */,
+				11C41A552CD9B56700FCDE20 /* MHS Historical Sites.app */,
 				11C41A652CD9B56800FCDE20 /* ManitoabaHistoricalSitesIOSTests.xctest */,
 				11C41A6F2CD9B56800FCDE20 /* ManitoabaHistoricalSitesIOSUITests.xctest */,
 			);
@@ -137,9 +139,10 @@
 				11C41A842CD9B67000FCDE20 /* GRDB */,
 				11C41A862CD9B68800FCDE20 /* GoogleMaps */,
 				11BF31712D01F1B100CBF24E /* GoogleMapsUtils */,
+				11C13C912D1A10700055F295 /* BottomSheet */,
 			);
 			productName = ManitoabaHistoricalSitesIOS;
-			productReference = 11C41A552CD9B56700FCDE20 /* ManitoabaHistoricalSitesIOS.app */;
+			productReference = 11C41A552CD9B56700FCDE20 /* MHS Historical Sites.app */;
 			productType = "com.apple.product-type.application";
 		};
 		11C41A642CD9B56800FCDE20 /* ManitoabaHistoricalSitesIOSTests */ = {
@@ -224,6 +227,7 @@
 				11C41A822CD9B5E400FCDE20 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				11C41A832CD9B67000FCDE20 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 				11BF31702D01F1B100CBF24E /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */,
+				11C13C902D1A10700055F295 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 11C41A562CD9B56700FCDE20 /* Products */;
@@ -423,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ManitoabaHistoricalSitesIOS/Preview Content\"";
@@ -430,20 +435,22 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManitoabaHistoricalSitesIOS/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Displays sites relative to your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TichonTechnologies.ManitobaHistoricalSitesIOS;
+				PRODUCT_NAME = "MHS Historical Sites";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -459,6 +466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ManitoabaHistoricalSitesIOS/Preview Content\"";
@@ -466,20 +474,22 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ManitoabaHistoricalSitesIOS/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Displays sites relative to your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MHS.ManitoabaHistoricalSitesIOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TichonTechnologies.ManitobaHistoricalSitesIOS;
+				PRODUCT_NAME = "MHS Historical Sites";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -614,6 +624,14 @@
 				minimumVersion = 6.1.0;
 			};
 		};
+		11C13C902D1A10700055F295 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lucaszischka/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		11C41A822CD9B5E400FCDE20 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
@@ -637,6 +655,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 11BF31702D01F1B100CBF24E /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */;
 			productName = GoogleMapsUtils;
+		};
+		11C13C912D1A10700055F295 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11C13C902D1A10700055F295 /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
 		};
 		11C41A842CD9B67000FCDE20 /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;

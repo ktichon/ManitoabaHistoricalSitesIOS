@@ -7,11 +7,13 @@
 
 import SwiftUI
 import GRDB
+import BottomSheet
 
 struct ContentView: View {
     
     @ObservedObject private var mainViewModel : MainViewModel
     @StateObject private var locationManager = LocationManager()
+    @State private var bottomSheetPercent : BottomSheetPosition = .hidden
     
 
     init(database : HistoricalSiteDatabase) {
@@ -56,8 +58,27 @@ struct ContentView: View {
                             //Sets the background colour to default
                             .background(Color(UIColor.secondarySystemGroupedBackground))
                             
-                            
+                        }
                         
+                        //Button to show legend
+                        if(mainViewModel.displayState == SiteDisplayState.FullMap){
+                            Button{
+                                mainViewModel.displayState = SiteDisplayState.MapWithLegend
+                                bottomSheetPercent = .relative(mainViewModel.displayState.rawValue)
+                            } label: {
+                                Text("Legend")
+                                    .foregroundStyle(Color.primary)
+                                    .font(.title3.bold())
+                                    
+                            }
+                            
+                
+                            //.tint(Color(UIColor.secondarySystemGroupedBackground))
+                            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                            .buttonStyle(.bordered)
+                            .buttonBorderShape( .capsule)
+                            
+                            
                             
                             
                         }
@@ -65,6 +86,30 @@ struct ContentView: View {
                         
                         
                         
+                        
+                        
+                    }
+                    .bottomSheet(bottomSheetPosition: $bottomSheetPercent, switchablePositions: [.relative(SiteDisplayState.MapWithLegend.rawValue), .hidden],
+                                 headerContent: {
+                        
+                        Spacer()
+                        Text("Legend")
+                            .font(.title2)
+                            .bold()
+                            .padding([.trailing, .leading])
+                        Spacer()
+                        
+                    }
+                                 
+                        ){
+                        LegendView()
+                    }
+                    //.isResizable(false)
+                    .enableTapToDismiss(true)
+                    .showCloseButton(true)
+                    .enableSwipeToDismiss(true)
+                    .onDismiss {
+                        mainViewModel.displayState = .FullMap
                     }
                 }
                 

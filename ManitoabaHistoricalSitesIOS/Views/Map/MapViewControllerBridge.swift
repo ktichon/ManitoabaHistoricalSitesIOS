@@ -113,7 +113,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             if marker.userData is GMUCluster {
-                print("Cluster was tapped")
+                //print("Cluster was tapped")
                 //If Cluser was clicked, zoom in
                 let cameraUpdate = GMSCameraUpdate.setTarget(marker.position, zoom: mapView.camera.zoom + 1)
                 mapView.animate(with: cameraUpdate)
@@ -123,7 +123,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
 
             //If marker was clicked, call newSiteSelected from the ViewModel
             if let selectedSite = marker.userData as? HistoricalSite {
-                print("Site \(selectedSite.name) was tapped")
+                //print("Site \(selectedSite.name) was tapped")
                 mapViewControllerBridge.newSiteSelected(selectedSite)
             } else{
                 print("Unknown marker was tapped")

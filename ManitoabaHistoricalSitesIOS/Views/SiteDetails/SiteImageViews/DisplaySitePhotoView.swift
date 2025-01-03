@@ -49,7 +49,7 @@ struct DisplaySitePhotoView: View {
             
             
             
-        }
+        } .padding(10)
     }
 }
 
