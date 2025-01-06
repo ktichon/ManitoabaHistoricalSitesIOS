@@ -69,14 +69,23 @@ struct ContentView: View {
                                 Text("Legend")
                                     .foregroundStyle(Color.primary)
                                     .font(.title3.bold())
+                                    .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                                    .background(
+                                        Capsule()
+                                            .strokeBorder(Color.primary, lineWidth: 1)
+                                            .background(Capsule().fill(Color(UIColor.tertiarySystemBackground)))
+                                            
+                                        
+                                    )
                                     
                             }
+                            .padding(5)
                             
                 
                             //.tint(Color(UIColor.secondarySystemGroupedBackground))
-                            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-                            .buttonStyle(.bordered)
-                            .buttonBorderShape( .capsule)
+//                            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+//                            .buttonStyle(.bordered)
+//                            .buttonBorderShape( .capsule)
                             
                             
                             
