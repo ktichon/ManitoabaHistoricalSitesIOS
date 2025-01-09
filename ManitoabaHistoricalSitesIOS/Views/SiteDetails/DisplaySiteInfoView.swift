@@ -43,9 +43,17 @@ struct DisplaySiteInfoView: View {
                         .padding(paddingBetweenItems)
                         .id(Self.topScrollID)
                         
-                        DisplaySitePhotosView(
-                            sitePhotos: sitePhotos)
-                        .padding(paddingBetweenItems)
+                        
+                        if sitePhotos.isEmpty{
+                            DisplayNoPhotosView()
+                                .padding(paddingBetweenItems)
+                        } else {
+                            DisplaySitePhotosView(
+                                sitePhotos: sitePhotos)
+                            .padding(paddingBetweenItems)
+                        }
+                        
+                        
                         
                         
                         //Only display description if it is not null

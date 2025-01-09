@@ -19,7 +19,11 @@ struct DisplaySitePhotoView: View {
                 case .failure(let error):
                     Image(systemName: "photo.badge.exclamationmark").resizable()
                 case .success(let image):
-                    image.resizable()
+                    //Opens link to image in browser on click
+                    Link(destination: URL(string: photo.photoUrl)!){
+                        image.resizable()
+                    }
+                    
                 default:
                     Image(systemName: "photo").resizable()
                 
