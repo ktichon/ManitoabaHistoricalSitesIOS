@@ -15,10 +15,19 @@ class SiteInfoFormatting {
         
         var formattedAttributedString  = AttributedString(html)
         //try to get attributedString as html
-        if let nsAttributedString = try? NSAttributedString(data: html.data(using: .utf16)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
-                   let attributedString = try? AttributedString(nsAttributedString, including: \.uiKit) {
-            formattedAttributedString = attributedString
+        do{
+            if let nsAttributedString = try? NSAttributedString(data: html.data(using: .utf16)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
+                       let attributedString = try? AttributedString(nsAttributedString, including: \.uiKit) {
+                formattedAttributedString = attributedString
+            }
         }
+        //There is a concurency error that can infrequently happen with NSAttributedString. This catch ensures that it will not crash the app
+        catch{
+            let nsError = error as NSError
+            print("MainViewModel.newSiteSelected.Error Fetching extra site info: \(nsError.localizedDescription)")
+            
+        }
+        
         
         //Sets the font and text colour to match with the rest of the texts
         formattedAttributedString.font = font

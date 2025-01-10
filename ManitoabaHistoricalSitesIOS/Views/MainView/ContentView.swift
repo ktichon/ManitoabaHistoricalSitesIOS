@@ -63,8 +63,7 @@ struct ContentView: View {
                         //Button to show legend
                         if(mainViewModel.displayState == SiteDisplayState.FullMap){
                             Button{
-                                mainViewModel.displayState = SiteDisplayState.MapWithLegend
-                                bottomSheetPercent = .relative(mainViewModel.displayState.rawValue)
+                                mainViewModel.showLegendSheet()
                             } label: {
                                 Text("Legend")
                                     .foregroundStyle(Color.primary)
@@ -98,7 +97,7 @@ struct ContentView: View {
                         
                         
                     }
-                    .bottomSheet(bottomSheetPosition: $bottomSheetPercent, switchablePositions: [.relative(SiteDisplayState.MapWithLegend.rawValue), .hidden],
+                    .bottomSheet(bottomSheetPosition: $mainViewModel.bottomSheetPercent, switchablePositions: [.relative(SiteDisplayState.MapWithLegend.rawValue), .hidden],
                                  headerContent: {
                         
                         Spacer()

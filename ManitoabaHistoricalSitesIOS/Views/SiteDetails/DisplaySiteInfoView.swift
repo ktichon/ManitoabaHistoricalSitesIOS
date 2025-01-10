@@ -14,7 +14,7 @@ struct DisplaySiteInfoView: View {
     var siteTypes: [String]
     var userLocation: CLLocationCoordinate2D
     var sitePhotos: [SitePhotos]
-    var sourceList: [String]
+    var sourceList: [SiteSource]
     
     
     let paddingBetweenItems = EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
@@ -94,9 +94,10 @@ struct DisplaySiteInfoView: View {
                            info: "<strong>Architect’s drawing of the Odd Fellows Home</strong> (1922)<br/><a href=\"http://www.mhs.mb.ca/docs/business/freepress.shtml\">Manitoba Free Press</a>, 15 July 1922, page 48.",                           importDate: "2024-05-06 14:24:23"
                            )
     
-    let sources = ["<a href=\"http://www.gov.mb.ca/chc/hrb/mun/m053.html\" target=\"_blank\">St. Andrews United Church, NE4-13-6 EPM Garson</a>, Manitoba Historic Resources Branch.",
-                   "<em>One Hundred Years in the History of the Rural Schools of Manitoba: Their Formation, Reorganization and Dissolution (1871-1971)</em> by <a href=\"http://www.mhs.mb.ca/docs/people/perfect_mb.shtml\">Mary B. Perfect</a>, MEd thesis, University of Manitoba, April 1978."
-                   
+    let sources = [
+        SiteSource(id: 1, siteId: 1, info: "<a href=\"http://www.gov.mb.ca/chc/hrb/mun/m053.html\" target=\"_blank\">St. Andrews United Church, NE4-13-6 EPM Garson</a>, Manitoba Historic Resources Branch."
+                   , importDate: "1/1/2025"),
+        SiteSource(id: 2, siteId: 1, info: "<em>One Hundred Years in the History of the Rural Schools of Manitoba: Their Formation, Reorganization and Dissolution (1871-1971)</em> by <a href=\"http://www.mhs.mb.ca/docs/people/perfect_mb.shtml\">Mary B. Perfect</a>, MEd thesis, University of Manitoba, April 1978.", importDate: "1/1/2025")
     ]
     
     @State var displayState = SiteDisplayState.FullSite

@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import GRDB
 import GoogleMaps
+import BottomSheet
 
 
 
@@ -24,8 +25,9 @@ final class MainViewModel: ObservableObject{
     @Published var currentSite: HistoricalSite
     @Published var displayState: SiteDisplayState = SiteDisplayState.FullMap
     @Published var sitePhotos: [SitePhotos] = []
-    @Published var siteSources: [String] = []
+    @Published var siteSources: [SiteSource] = []
     @Published var siteTypes: [String] = []
+    @Published var bottomSheetPercent: BottomSheetPosition = .hidden
     
     
     
@@ -85,9 +87,18 @@ final class MainViewModel: ObservableObject{
         }
     }
     
+    //Called by ContentView to show the legend bottom sheet
+    func showLegendSheet() {
+        displayState = SiteDisplayState.MapWithLegend
+        bottomSheetPercent = .relative(SiteDisplayState.MapWithLegend.rawValue)
+    }
+    
     //Called when a new site is selected
     func newSiteSelected(newSite: HistoricalSite) {
-        displayState = SiteDisplayState.HalfSite
+        //Hide the legend sheet if it is open
+        bottomSheetPercent = .hidden
+        
+        //Get the site information
         if newSite != currentSite {
             currentSite = newSite
             
@@ -106,9 +117,11 @@ final class MainViewModel: ObservableObject{
                     self.sitePhotos = try SitePhotos.filter(Column("siteId") == newSite.id).fetchAll(db)
                     
                     //Sources
-                    let sourcesSQL = "SELECT info FROM siteSource where siteId = ?"
-                    self.siteSources = try String.fetchAll(db, sql:
-                                                            sourcesSQL, arguments:[ newSite.id]  )
+                    self.siteSources = try SiteSource.filter(Column("siteId") == newSite.id).fetchAll(db)
+                    //Replaced sources from string to the siteSource object, as that as a ID we can use in the foreach loop
+//                    let sourcesSQL = "SELECT info FROM siteSource where siteId = ?"
+//                    self.siteSources = try String.fetchAll(db, sql:
+//                                                            sourcesSQL, arguments:[ newSite.id]  )
                     
                     //Site Types
                     let siteTypesSQL = "SELECT type FROM siteType INNER JOIN siteWithType ON siteWithType.siteTypeId = siteType.id WHERE siteWithType.siteId = ?"
@@ -122,6 +135,9 @@ final class MainViewModel: ObservableObject{
                 
             }
         }
+        
+        //Lastly set the display state
+        displayState = SiteDisplayState.HalfSite
     }
     
     
