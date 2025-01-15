@@ -38,8 +38,9 @@ struct DisplaySitePhotoView: View {
                 
 //            Image(systemName: "exclamationmark.octagon")
             
-            if photo.info != nil{
-                Text(SiteInfoFormatting.renderHTML(html: photo.info!, font: .body))
+            if let photoInfo = photo.info{
+                //Text(SiteInfoFormatting.renderHTML(html: photo.info!, font: .body))
+                Text(html: photoInfo, font: .body)
                     .padding([.trailing, .leading], 10)
                     .multilineTextAlignment(.center)
                     

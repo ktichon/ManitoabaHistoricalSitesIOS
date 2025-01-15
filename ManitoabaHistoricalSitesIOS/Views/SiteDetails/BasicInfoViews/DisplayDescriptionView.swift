@@ -12,7 +12,9 @@ struct DisplayDescriptionView: View {
 
     
     var body: some View {
-        Text(SiteInfoFormatting.renderHTML(html: description, font: .body))
+        //Text(SiteInfoFormatting.renderHTML(html: description, font: .body))
+        Text(html: description, font: .body)
+            
     }
 }
 

@@ -11,8 +11,11 @@ struct DisplaySiteLinkView: View {
     var url: String
     
     var body: some View {
-        Link("Click here to go to the Manitoba Historical Society webpage for this site!", destination: URL(string: url)!)
-            .font(.title3)
+        if let notNullURl = URL(string: url) {
+            Link("Click here to go to the Manitoba Historical Society webpage for this site!", destination: notNullURl)
+                .font(.title3)
+        }
+        
         
     }
 }

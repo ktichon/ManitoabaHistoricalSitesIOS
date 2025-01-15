@@ -24,11 +24,14 @@ struct DisplaySiteSourcesView: View {
                     .padding(sourcePadding)
             } else{
                 ForEach(sourcesList, id: \.id){ source in
-                    Text(SiteInfoFormatting.renderHTML(html: source.info, font: .body))
+                    //Text(SiteInfoFormatting.renderHTML(html: source.info, font: .body))
+                    Text(html: source.info, font: .body)
                         .padding(sourcePadding)
                 }
                 
             }
+            //Text("This info was last updated imported from the MHS to this app on  ")
+            
             
             
         }
