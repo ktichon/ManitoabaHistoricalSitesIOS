@@ -18,9 +18,15 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     //The bottom padding for the map
     var mapBottomPadding: CGFloat
     
-    var newSiteSelected: (HistoricalSite) -> Void
+    //Keeps track of the selected marker on the map
+    @Binding var selectedMarker : GMSMarker?
+    //Keeps track if the site marker was clicked on or if the msrker was selected in the search bar
+    @Binding var siteSelectedBySearch : Bool
+    
+    var newSiteSelected: (Int) -> Void
     
     let defaultZoom : Float = 18.0
+    let searchZoomLevel : Float = 19
     
     
     
@@ -60,6 +66,8 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         
         return mapViewController
     }
+    
+    //Called whenever binded values are updated
     func updateUIViewController(_ uiViewController: MapViewController, context: Context) {
         //Sets if user location is enabled
         uiViewController.map.isMyLocationEnabled = locationEnable
@@ -94,6 +102,19 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         uiViewController.map.padding = UIEdgeInsets(top: 0, left: 0, bottom: mapBottomPadding, right: 0)
         
         //siteMarkers.forEach{ $0.map = uiViewController.map        }
+        
+        //When a marker is elected
+        if let notNullSelectedMarker = selectedMarker  {
+            // If is was selected by the search bar, zoom to location
+            if siteSelectedBySearch {
+                uiViewController.map.camera = GMSCameraPosition(target: notNullSelectedMarker.position, zoom: searchZoomLevel)
+            }
+            //Set the selected marker on the map to nil, to hide the marker info window
+            uiViewController.map.selectedMarker = nil
+            //Sets the binded varible to nil, so that this triggers when a marker is first selected
+            selectedMarker = nil
+            
+        }
     }
     
     
@@ -120,16 +141,28 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
                 return true
             }
             
+            
+            
 
             //If marker was clicked, call newSiteSelected from the ViewModel
-            if let selectedSite = marker.userData as? HistoricalSite {
+            if let selectedSiteId = marker.userData as? Int {
+                //Lets the map know that the site marker was clicked on, so no need to move the camera
+                mapViewControllerBridge.siteSelectedBySearch = false
+                //Calls an update to the mapViewControllerBridge that will hide the marker info window
+                mapViewControllerBridge.selectedMarker = marker
+                
+                
                 //print("Site \(selectedSite.name) was tapped")
-                mapViewControllerBridge.newSiteSelected(selectedSite)
+                mapViewControllerBridge.newSiteSelected(selectedSiteId)
             } else{
                 print("Unknown marker was tapped")
             }
             
             return false
         }
+    }
+    
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        return nil
     }
 }

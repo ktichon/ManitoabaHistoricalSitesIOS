@@ -29,6 +29,12 @@ final class MainViewModel: ObservableObject{
     @Published var siteTypes: [String] = []
     @Published var bottomSheetPercent: BottomSheetPosition = .hidden
     
+    //Lets the map know when a new marker is selected
+    //Used in searchBar
+    @Published var selectedMarker: GMSMarker?
+    //Informes the map that the newly selected site was selected by the search bar
+    @Published var siteSelectedBySearch: Bool = false
+    
     
     
     
@@ -68,9 +74,10 @@ final class MainViewModel: ObservableObject{
             //Creates a marker for each site and adds them to the list
             siteMarkers = sites.map{ site in
                 let marker = GMSMarker(position: site.position)
-                //marker.title = site.name
-                marker.userData = site
-                //marker.snippet = site.formatedAddress()
+                marker.title = site.name
+                marker.snippet = site.formatedAddress()
+                marker.userData = site.id
+                
                 
                 
                 //Resizes the icon
@@ -94,30 +101,34 @@ final class MainViewModel: ObservableObject{
     }
     
     //Called when a new site is selected
-    func newSiteSelected(newSite: HistoricalSite) {
+    func newSiteSelected(newSiteId: Int) {
         //Hide the legend sheet if it is open
         bottomSheetPercent = .hidden
         
         //Get the site information
-        if newSite != currentSite {
-            currentSite = newSite
+        if newSiteId != currentSite.id {
             
             //Clears the fetched info from the last selected site
             self.siteTypes = []
             self.sitePhotos = []
             self.siteSources = []
             
-            
-            //Fetch the related info for the site from the SitePhotos, SiteSources, and SiteWithType
+            //Get the site by the siteId
+            //And fetch the related info for the site from the SitePhotos, SiteSources, and SiteWithType
             do {
                 
                 try self.database.reader.read{ db in
+                    //Site
+                    if let newSite = try HistoricalSite.filter(Column("id") == newSiteId).fetchOne(db){
+                        self.currentSite = newSite
+                    }
+                    
                     
                     //Photos
-                    self.sitePhotos = try SitePhotos.filter(Column("siteId") == newSite.id).fetchAll(db)
+                    self.sitePhotos = try SitePhotos.filter(Column("siteId") == newSiteId).fetchAll(db)
                     
                     //Sources
-                    self.siteSources = try SiteSource.filter(Column("siteId") == newSite.id).fetchAll(db)
+                    self.siteSources = try SiteSource.filter(Column("siteId") == newSiteId).fetchAll(db)
                     //Replaced sources from string to the siteSource object, as that as a ID we can use in the foreach loop
 //                    let sourcesSQL = "SELECT info FROM siteSource where siteId = ?"
 //                    self.siteSources = try String.fetchAll(db, sql:
@@ -126,7 +137,7 @@ final class MainViewModel: ObservableObject{
                     //Site Types
                     let siteTypesSQL = "SELECT type FROM siteType INNER JOIN siteWithType ON siteWithType.siteTypeId = siteType.id WHERE siteWithType.siteId = ?"
                     
-                    self.siteTypes = try String.fetchAll(db, sql: siteTypesSQL, arguments: [newSite.id])
+                    self.siteTypes = try String.fetchAll(db, sql: siteTypesSQL, arguments: [newSiteId])
                     
                 }
             } catch {

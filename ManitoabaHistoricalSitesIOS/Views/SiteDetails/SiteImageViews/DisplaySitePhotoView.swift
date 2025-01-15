@@ -16,7 +16,7 @@ struct DisplaySitePhotoView: View {
             AsyncImage(url: URL(string: photo.photoUrl)){ phase in
                 switch phase {
                 
-                case .failure(let error):
+                case .failure(_):
                     Image(systemName: "photo.badge.exclamationmark").resizable()
                 case .success(let image):
                     //Opens link to image in browser on click

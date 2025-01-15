@@ -38,11 +38,17 @@ struct ContentView: View {
                         
                         
                         
-                        MapViewControllerBridge(siteMarkers: $mainViewModel.siteMarkers, locationEnable: $locationManager.locationEnabled,
-                                                newMapLoad: $locationManager.newMapLoad,
-                                                mapBottomPadding: displayedItemSize,
-                                                newSiteSelected: mainViewModel.newSiteSelected(newSite: )
+                        MapViewControllerBridge(
+                            siteMarkers: $mainViewModel.siteMarkers,
+                            locationEnable: $locationManager.locationEnabled,
+                            newMapLoad: $locationManager.newMapLoad,
+                            mapBottomPadding: displayedItemSize,
+                            selectedMarker: $mainViewModel.selectedMarker,
+                            siteSelectedBySearch: $mainViewModel.siteSelectedBySearch,
+                            newSiteSelected: mainViewModel.newSiteSelected(newSiteId: )                            
                         )
+                        
+                        
                         
                         //Show site info
                         if (mainViewModel.displayState == SiteDisplayState.FullSite  || mainViewModel.displayState == SiteDisplayState.HalfSite){
