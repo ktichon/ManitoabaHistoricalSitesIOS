@@ -14,6 +14,7 @@ struct ContentView: View {
     @ObservedObject private var mainViewModel : MainViewModel
     @StateObject private var locationManager = LocationManager()
     @State private var bottomSheetPercent : BottomSheetPosition = .hidden
+    @State private var searchText: String = ""
     
 
     init(database : HistoricalSiteDatabase) {
@@ -134,6 +135,11 @@ struct ContentView: View {
             
             
         }
+//        .toolbar{
+//            ToolbarItem(placement: .principal){
+//                
+//            }
+//        }
 
     }
 }
