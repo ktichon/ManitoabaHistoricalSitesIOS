@@ -25,7 +25,9 @@ struct DisplaySiteSourcesView: View {
             } else{
                 ForEach(sourcesList, id: \.id){ source in
                     //Text(SiteInfoFormatting.renderHTML(html: source.info, font: .body))
-                    Text(html: source.info, font: .body)
+                    //Text(html: source.infoMarkdown, font: .body)
+                    Text(LocalizedStringKey(source.infoMarkdown))
+                        .font(.body)
                         .padding(sourcePadding)
                 }
                 
@@ -38,14 +40,4 @@ struct DisplaySiteSourcesView: View {
     }
 }
 
-#Preview {
-    let sources = [
-        SiteSource(id: 1, siteId: 1, info: "<a href=\"http://www.gov.mb.ca/chc/hrb/mun/m053.html\" target=\"_blank\">St. Andrews United Church, NE4-13-6 EPM Garson</a>, Manitoba Historic Resources Branch."
-                   , importDate: "1/1/2025"),
-        SiteSource(id: 2, siteId: 1, info: "<em>One Hundred Years in the History of the Rural Schools of Manitoba: Their Formation, Reorganization and Dissolution (1871-1971)</em> by <a href=\"http://www.mhs.mb.ca/docs/people/perfect_mb.shtml\">Mary B. Perfect</a>, MEd thesis, University of Manitoba, April 1978.", importDate: "1/1/2025")
-                   
-    ]
-    DisplaySiteSourcesView(
-        sourcesList: sources
-    )
-}
+

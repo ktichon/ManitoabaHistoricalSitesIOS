@@ -72,21 +72,4 @@ struct DisplaySitePhotosView: View {
     }
 }
 
-#Preview ("With Photos") {
-    let photo1 = SitePhotos(id: 140229, siteId: 3817, photoName: "3817_oddfellowshome2_1715023463.jpg", width: 600, height: 422, photoUrl: "http://www.mhs.mb.ca/docs/sites/images/oddfellowshome2.jpg",
-                           info: "<strong>Architect’s drawing of the Odd Fellows Home</strong> (1922)<br/><a href=\"http://www.mhs.mb.ca/docs/business/freepress.shtml\">Manitoba Free Press</a>, 15 July 1922, page 48.",                           importDate: "2024-05-06 14:24:23"
-                           )
-    
-    let photo2 = SitePhotos(id: 140229, siteId: 3817, photoName: "3817_oddfellowshome2_1715023463.jpg", width: 600, height: 250, photoUrl: "http://www.mhs.mb.ca/docs/sites/images/oddfellowshome2.jpg",
-                           info: "<strong>Architect’s drawing of the Odd Fellows Home</strong> (1922)<br/><a href=\"http://www.mhs.mb.ca/docs/business/freepress.shtml\">Manitoba Free Press</a>, 15 July 1922, page 48.",                           importDate: "2024-05-06 14:24:23"
-                           )
-    DisplaySitePhotosView(
-        sitePhotos: [photo1, photo2]
-    )
-}
 
-#Preview("No Photos"){
-    DisplaySitePhotosView(
-        sitePhotos: []
-    )
-}

@@ -57,9 +57,9 @@ struct DisplaySiteInfoView: View {
                         
                         
                         //Only display description if it is not null
-                        if site.description != nil{
+                        if site.descriptionMarkdown != nil{
                             DisplayDescriptionView(
-                                description: site.description!)
+                                description: site.descriptionMarkdown!)
                             .padding(paddingBetweenItems)
                         }
                         
@@ -85,31 +85,3 @@ struct DisplaySiteInfoView: View {
 }
 
 
-#Preview {
-    let photo1 = SitePhotos(id: 140229, siteId: 3817, photoName: "3817_oddfellowshome2_1715023463.jpg", width: 600, height: 422, photoUrl: "http://www.mhs.mb.ca/docs/sites/images/oddfellowshome2.jpg",
-                           info: "<strong>Architect’s drawing of the Odd Fellows Home</strong> (1922)<br/><a href=\"http://www.mhs.mb.ca/docs/business/freepress.shtml\">Manitoba Free Press</a>, 15 July 1922, page 48.",                           importDate: "2024-05-06 14:24:23"
-                           )
-    
-    let photo2 = SitePhotos(id: 140229, siteId: 3817, photoName: "3817_oddfellowshome2_1715023463.jpg", width: 600, height: 250, photoUrl: "http://www.mhs.mb.ca/docs/sites/images/oddfellowshome2.jpg",
-                           info: "<strong>Architect’s drawing of the Odd Fellows Home</strong> (1922)<br/><a href=\"http://www.mhs.mb.ca/docs/business/freepress.shtml\">Manitoba Free Press</a>, 15 July 1922, page 48.",                           importDate: "2024-05-06 14:24:23"
-                           )
-    
-    let sources = [
-        SiteSource(id: 1, siteId: 1, info: "<a href=\"http://www.gov.mb.ca/chc/hrb/mun/m053.html\" target=\"_blank\">St. Andrews United Church, NE4-13-6 EPM Garson</a>, Manitoba Historic Resources Branch."
-                   , importDate: "1/1/2025"),
-        SiteSource(id: 2, siteId: 1, info: "<em>One Hundred Years in the History of the Rural Schools of Manitoba: Their Formation, Reorganization and Dissolution (1871-1971)</em> by <a href=\"http://www.mhs.mb.ca/docs/people/perfect_mb.shtml\">Mary B. Perfect</a>, MEd thesis, University of Manitoba, April 1978.", importDate: "1/1/2025")
-    ]
-    
-    @State var displayState = SiteDisplayState.FullSite
-    
-    
-    DisplaySiteInfoView(
-        site: HistoricalSite(),
-        displayState: $displayState ,
-        siteTypes: [],
-        userLocation: CLLocationCoordinate2D(latitude: 49.8555522, longitude: -97.2878815),
-        sitePhotos: [photo1, photo2],
-        sourceList: sources
-        
-    )
-}

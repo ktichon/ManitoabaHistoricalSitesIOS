@@ -34,6 +34,7 @@ class SiteInfoFormatting {
 //        formattedAttributedString.foregroundColor = .label
 //        return formattedAttributedString
 //    }
+   
     
     //Gets the site name from the main type
     static func getTypeName(typeId: Int) -> String{
@@ -126,18 +127,19 @@ extension StringProtocol {
 
 
 //Custom Text that preserves the html and sets a font
-extension Text {
-    init(html: String, font : Font, alert: String? = nil) {
-        do {
-            var attributedString = try html.htmlToAttributedString()
-            attributedString.font = font
-            attributedString.foregroundColor = .label
-           
-            self.init(
-                attributedString
-            )
-        } catch {
-            self.init(alert ?? error.localizedDescription)
-        }
-    }
-}
+//extension Text {
+//    init(html: String, font : Font, alert: String? = nil) {
+//        do {
+//            var attributedString = try html.htmlToAttributedString()
+//            attributedString.font = font
+//            attributedString.foregroundColor = .label
+//           
+//            self.init(
+//                attributedString
+//            )
+//        } catch {
+//            self.init(alert ?? error.localizedDescription)
+//        }
+//    }
+//}
+

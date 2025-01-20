@@ -11,6 +11,7 @@ import GRDB
 struct SiteSource : Codable, Hashable, Sendable, FetchableRecord, TableRecord{
     var id: Int
     var siteId: Int
-    var info: String
+    var infoHTML: String
+    var infoMarkdown: String
     var importDate: String
 }

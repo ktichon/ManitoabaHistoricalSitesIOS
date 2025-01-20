@@ -22,7 +22,8 @@ struct SitePhotos : Codable, Hashable, Sendable, FetchableRecord, TableRecord{
     
     var photoUrl: String
     
-    var info: String?
+    var infoHTML: String?
+    var infoMarkdown: String?
     
     var importDate: String
 }

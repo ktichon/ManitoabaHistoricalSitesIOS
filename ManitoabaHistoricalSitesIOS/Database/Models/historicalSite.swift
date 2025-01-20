@@ -23,7 +23,8 @@ struct HistoricalSite: Codable, Hashable, Sendable, FetchableRecord, Persistable
 
     var municipality: String?
     var province: String?
-    var description: String?
+    var descriptionHTML: String?
+    var descriptionMarkdown: String?
 
     var siteUrl: String
 
@@ -64,7 +65,8 @@ struct HistoricalSite: Codable, Hashable, Sendable, FetchableRecord, Persistable
         self.longitude = -97.1386276
         self.municipality = ""
         self.province = ""
-        self.description = ""
+        self.descriptionHTML = ""
+        self.descriptionMarkdown = ""
         self.siteUrl = ""
         self.keywords = ""
         self.importDate = ""
