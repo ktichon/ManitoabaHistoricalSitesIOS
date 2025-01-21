@@ -57,13 +57,16 @@ struct DisplaySiteInfoView: View {
                         
                         
                         //Only display description if it is not null
-                        if site.descriptionMarkdown != nil{
+                        if let siteDescription = site.descriptionMarkdown{
                             DisplayDescriptionView(
-                                description: site.descriptionMarkdown!)
+                                description: siteDescription)
                             .padding(paddingBetweenItems)
                         }
                         
                         DisplaySiteSourcesView(sourcesList: sourceList)
+                            .padding(paddingBetweenItems)
+                        
+                        DisplaySiteImportDateView(importDate: site.importDate)
                             .padding(paddingBetweenItems)
                             
                         

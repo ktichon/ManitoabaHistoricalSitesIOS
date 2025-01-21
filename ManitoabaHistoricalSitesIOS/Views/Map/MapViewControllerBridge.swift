@@ -27,7 +27,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     
     let defaultZoom : Float = 18.0
     let searchZoomLevel : Float = 19
-    
+    let minimumClusterSize : UInt = 15
     
     
     
@@ -61,6 +61,9 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = GMUDefaultClusterRenderer(mapView: mapViewController.map, clusterIconGenerator: iconGenerator)
         
+        renderer.minimumClusterSize = minimumClusterSize
+    
+        
         mapViewController.clusterManager = GMUClusterManager(map: mapViewController.map, algorithm: algorithm, renderer: renderer)
         mapViewController.clusterManager.setMapDelegate(context.coordinator)
         
@@ -90,6 +93,13 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         
         
         
+        
+        
+        //Sets the bottom map padding based off the displayState
+        uiViewController.map.padding = UIEdgeInsets(top: 0, left: 0, bottom: mapBottomPadding, right: 0)
+        
+        //siteMarkers.forEach{ $0.map = uiViewController.map        }
+        
         if uiViewController.clusterManager != nil {
             //Adds site to cluster manager
             uiViewController.clusterManager.clearItems()
@@ -97,11 +107,6 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
             uiViewController.clusterManager.add(siteMarkers)
             uiViewController.clusterManager.cluster()
         }
-        
-        //Sets the bottom map padding based off the displayState
-        uiViewController.map.padding = UIEdgeInsets(top: 0, left: 0, bottom: mapBottomPadding, right: 0)
-        
-        //siteMarkers.forEach{ $0.map = uiViewController.map        }
         
         //When a marker is elected
         if let notNullSelectedMarker = selectedMarker  {
@@ -160,9 +165,5 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
             
             return false
         }
-    }
-    
-    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        return nil
     }
 }

@@ -10,32 +10,6 @@ import SwiftUI
 import CoreLocation
 class SiteInfoFormatting {
     
-    // NSAttributedString was giving me a bunch Concurentcy errors. I have replaced this logic to display html with the
-//    static func renderHTML(html : String, font : Font) -> AttributedString{
-//        
-//        var formattedAttributedString  = AttributedString(html)
-//        //try to get attributedString as html
-//        do{
-//            if let nsAttributedString = try? NSAttributedString(data: html.data(using: .utf16)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
-//                       let attributedString = try? AttributedString(nsAttributedString, including: \.uiKit) {
-//                formattedAttributedString = attributedString
-//            }
-//        }
-//        //There is a concurency error that can infrequently happen with NSAttributedString. This catch ensures that it will not crash the app
-//        catch{
-//            let nsError = error as NSError
-//            print("MainViewModel.newSiteSelected.Error Fetching extra site info: \(nsError.localizedDescription)")
-//            
-//        }
-//        
-//        
-//        //Sets the font and text colour to match with the rest of the texts
-//        formattedAttributedString.font = font
-//        formattedAttributedString.foregroundColor = .label
-//        return formattedAttributedString
-//    }
-   
-    
     //Gets the site name from the main type
     static func getTypeName(typeId: Int) -> String{
         let siteTypeMapping = [
@@ -124,22 +98,4 @@ extension StringProtocol {
         )
     }
 }
-
-
-//Custom Text that preserves the html and sets a font
-//extension Text {
-//    init(html: String, font : Font, alert: String? = nil) {
-//        do {
-//            var attributedString = try html.htmlToAttributedString()
-//            attributedString.font = font
-//            attributedString.foregroundColor = .label
-//           
-//            self.init(
-//                attributedString
-//            )
-//        } catch {
-//            self.init(alert ?? error.localizedDescription)
-//        }
-//    }
-//}
 
