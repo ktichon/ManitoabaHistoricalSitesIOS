@@ -23,7 +23,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     //Keeps track if the site marker was clicked on or if the msrker was selected in the search bar
     @Binding var siteSelectedBySearch : Bool
     
-    var newSiteSelected: (Int) -> Void
+    var newSiteSelected: (GMSMarker, Bool) -> Void
     
     let defaultZoom : Float = 18.0
     let searchZoomLevel : Float = 19
@@ -146,22 +146,24 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
                 return true
             }
             
+            mapViewControllerBridge.newSiteSelected(marker, false)
+            
             
             
 
-            //If marker was clicked, call newSiteSelected from the ViewModel
-            if let selectedSiteId = marker.userData as? Int {
-                //Lets the map know that the site marker was clicked on, so no need to move the camera
-                mapViewControllerBridge.siteSelectedBySearch = false
-                //Calls an update to the mapViewControllerBridge that will hide the marker info window
-                mapViewControllerBridge.selectedMarker = marker
-                
-                
-                //print("Site \(selectedSite.name) was tapped")
-                mapViewControllerBridge.newSiteSelected(selectedSiteId)
-            } else{
-                print("Unknown marker was tapped")
-            }
+//            //If marker was clicked, call newSiteSelected from the ViewModel
+//            if let selectedSiteId = marker.userData as? Int {
+//                //Lets the map know that the site marker was clicked on, so no need to move the camera
+//                mapViewControllerBridge.siteSelectedBySearch = false
+//                //Calls an update to the mapViewControllerBridge that will hide the marker info window
+//                mapViewControllerBridge.selectedMarker = marker
+//                
+//                
+//                //print("Site \(selectedSite.name) was tapped")
+//                mapViewControllerBridge.newSiteSelected(selectedSiteId)
+//            } else{
+//                print("Unknown marker was tapped")
+//            }
             
             return false
         }

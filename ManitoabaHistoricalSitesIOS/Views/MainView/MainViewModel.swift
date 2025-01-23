@@ -35,6 +35,8 @@ final class MainViewModel: ObservableObject{
     //Informes the map that the newly selected site was selected by the search bar
     @Published var siteSelectedBySearch: Bool = false
     
+    @Published var searchText:String = ""
+    
     
     
     
@@ -101,63 +103,59 @@ final class MainViewModel: ObservableObject{
     }
     
     //Called when a new site is selected
-    func newSiteSelected(newSiteId: Int) {
+    func newSiteSelected(siteMarker: GMSMarker, selectedBySearch: Bool) {
         //Hide the legend sheet if it is open
         bottomSheetPercent = .hidden
         
-        //Get the site information
-        if newSiteId != currentSite.id {
+        //Get the newSiteID from the marker
+        if let newSiteId = siteMarker.userData as? Int {
+            //Lets the map know whether or not the site marker was clicked on, allowing it to zoom in appropriately
+            self.siteSelectedBySearch = selectedBySearch
+            //Calls an update to the mapViewControllerBridge that will hide the marker info window
+            self.selectedMarker = siteMarker
             
-            //Clears the fetched info from the last selected site
-            self.siteTypes = []
-            self.sitePhotos = []
-            self.siteSources = []
             
-            //Get the site by the siteId
-            //And fetch the related info for the site from the SitePhotos, SiteSources, and SiteWithType
-            do {
+            //Get the site information
+            if newSiteId != currentSite.id {
                 
-                try self.database.reader.read{ db in
-                    //Site
-                    if let newSite = try HistoricalSite.filter(Column("id") == newSiteId).fetchOne(db){
-                        self.currentSite = newSite
+                //Clears the fetched info from the last selected site
+                self.siteTypes = []
+                self.sitePhotos = []
+                self.siteSources = []
+                
+                //Get the site by the siteId
+                //And fetch the related info for the site from the SitePhotos, SiteSources, and SiteWithType
+                do {
+                    
+                    try self.database.reader.read{ db in
+                        //Site
+                        if let newSite = try HistoricalSite.filter(Column("id") == newSiteId).fetchOne(db){
+                            self.currentSite = newSite
+                        }
+                        
+                        
+                        //Photos
+                        self.sitePhotos = try SitePhotos.filter(Column("siteId") == newSiteId).fetchAll(db)
+                        
+                        //Sources
+                        self.siteSources = try SiteSource.filter(Column("siteId") == newSiteId).fetchAll(db)
+                        
+                        //Site Types
+                        let siteTypesSQL = "SELECT type FROM siteType INNER JOIN siteWithType ON siteWithType.siteTypeId = siteType.id WHERE siteWithType.siteId = ?"
+                        
+                        self.siteTypes = try String.fetchAll(db, sql: siteTypesSQL, arguments: [newSiteId])
+                        
                     }
-                    
-                    
-                    //Photos
-                    self.sitePhotos = try SitePhotos.filter(Column("siteId") == newSiteId).fetchAll(db)
-                    
-                    //Sources
-                    self.siteSources = try SiteSource.filter(Column("siteId") == newSiteId).fetchAll(db)
-                    //Replaced sources from string to the siteSource object, as that as a ID we can use in the foreach loop
-//                    let sourcesSQL = "SELECT info FROM siteSource where siteId = ?"
-//                    self.siteSources = try String.fetchAll(db, sql:
-//                                                            sourcesSQL, arguments:[ newSite.id]  )
-                    
-                    //Site Types
-                    let siteTypesSQL = "SELECT type FROM siteType INNER JOIN siteWithType ON siteWithType.siteTypeId = siteType.id WHERE siteWithType.siteId = ?"
-                    
-                    self.siteTypes = try String.fetchAll(db, sql: siteTypesSQL, arguments: [newSiteId])
+                } catch {
+                    let nsError = error as NSError
+                    print("MainViewModel.newSiteSelected.Error Fetching extra site info: \(nsError.localizedDescription)")
                     
                 }
-            } catch {
-                let nsError = error as NSError
-                print("MainViewModel.newSiteSelected.Error Fetching extra site info: \(nsError.localizedDescription)")
-                
             }
+            //Lastly set the display state
+            displayState = SiteDisplayState.HalfSite
         }
-        
-        //Lastly set the display state
-        displayState = SiteDisplayState.HalfSite
+
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
