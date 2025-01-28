@@ -1,33 +1,34 @@
+//
+//  DisplaySearchResults.swift
+//  ManitoabaHistoricalSitesIOS
+//
+//  Created by Kyle Tichon on 2025-01-22.
+//
+
+
 import SwiftUI
 import CoreLocation
+import GoogleMaps
 
+//Displays the list of search results
 struct DisplaySearchResults: View {
-    var searchResults: [HistoricalSite]
+    var searchResults: [GMSMarker]
     var userLocation: CLLocationCoordinate2D
+    var newSiteSelected: (GMSMarker, Bool) -> Void
     var body: some View {
         ScrollView{
             LazyVStack{
-                ForEach(searchResults, id: \.id){ site in
-                    HStack{
-                        VStack(alignment: .leading){
-                            Text(site.name)
-                                .lineLimit(2)
-                                .font(.body)
-                                .multilineTextAlignment(.leading)
-                            
-                            
-                            Text(site.formatedAddress())
-                                .lineLimit(2)
-                                .font(.footnote)
-                                .multilineTextAlignment(.leading)
-                        }
-                        Spacer()
-                        VStack{
-                            Text(SiteInfoFormatting.getDisplayDistance(coord1: site.position, coord2: userLocation))
-                        }
-                        .padding(5)
-                    }
+                ForEach(searchResults, id: \.self){ siteMarker in
+                    
+                    DisplaySearchResult(
+                        siteName: siteMarker.title ?? "",
+                        siteAddress: siteMarker.snippet ?? "",
+                        distanceFromUser: SiteInfoFormatting.getDisplayDistance(coord1: siteMarker.position, coord2: userLocation))
+                    
                     .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                    .onTapGesture {
+                        newSiteSelected(siteMarker, true)
+                    }
                     Divider()
                         .background(Color.secondary)
                 }
@@ -36,4 +37,33 @@ struct DisplaySearchResults: View {
                 
         }
     }
+}
+
+//Display used for each search result
+struct DisplaySearchResult: View {
+    var siteName: String
+    var siteAddress: String
+    var distanceFromUser: String
+    var body: some View {
+        HStack{
+            VStack(alignment: .leading){
+                Text(siteName)
+                    .lineLimit(2)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                
+                
+                Text(siteAddress)
+                    .lineLimit(2)
+                    .font(.footnote)
+                    .multilineTextAlignment(.leading)
+            }
+            Spacer()
+            VStack{
+                Text(distanceFromUser)
+            }
+            .padding(5)
+        }
+    }
+    
 }

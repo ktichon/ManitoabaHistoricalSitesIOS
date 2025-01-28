@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomSearchBar: View {
     @Binding var searchText: String
     
-    @State var active = false
+    @Binding var searchActive: Bool
     
     var body: some View {
         HStack {
@@ -18,7 +18,7 @@ struct CustomSearchBar: View {
                 Image(systemName: "magnifyingglass")
                 TextField("Search", text: $searchText, onEditingChanged: { editing in
                                     withAnimation {
-                                        active = editing
+                                        searchActive = editing
                                     }
                 })
             }
@@ -27,14 +27,14 @@ struct CustomSearchBar: View {
             .cornerRadius(10)
             
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
-            .padding(.horizontal, active ? 0 : 50)
+            .padding(.horizontal, searchActive ? 0 : 50)
             Button("Cancel") {
                 withAnimation {
-                    active = false
+                    searchActive = false
                 }
             }
-            .opacity(active ? 1 : 0)
-            .frame(width: active ? nil : 0)
+            .opacity(searchActive ? 1 : 0)
+            .frame(width: searchActive ? nil : 0)
         }
     }
 }

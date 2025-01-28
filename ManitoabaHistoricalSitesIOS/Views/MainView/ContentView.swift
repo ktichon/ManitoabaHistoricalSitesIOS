@@ -118,14 +118,17 @@ struct ContentView: View {
                 
                 
             }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem(placement: .principal){
+                    CustomSearchBar(searchText: $mainViewModel.searchText, searchActive: $searchActive)
+                    
+                }
+            }
             
         }
-//        .toolbar{
-//            ToolbarItem(placement: .principal){
-//                CustomSearchBar(searchText: $mainViewModel.searchText, searchActive: $searchActive)
-//                
-//            }
-//        }
+        
     }
 }
     
