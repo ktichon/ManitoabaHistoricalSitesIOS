@@ -21,7 +21,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     //Keeps track of the selected marker on the map
     @Binding var selectedMarker : GMSMarker?
     //Keeps track if the site marker was clicked on or if the msrker was selected in the search bar
-    @Binding var siteSelectedBySearch : Bool
+    var siteSelectedBySearch : Bool
     
     var newSiteSelected: (GMSMarker, Bool) -> Void
     

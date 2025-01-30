@@ -15,7 +15,8 @@ struct ContentView: View {
     @ObservedObject private var mainViewModel : MainViewModel
     @StateObject private var locationManager = LocationManager()
     @State private var bottomSheetPercent : BottomSheetPosition = .hidden
-    @State private var searchActive: Bool = false
+    @FocusState private var isFocused: Bool
+    
 
     
 
@@ -35,6 +36,17 @@ struct ContentView: View {
                         let displayedItemSize =  (mainViewModel.displayState.rawValue * geometry.size.height)
                         ZStack(alignment: .bottom){
                             
+                            if mainViewModel.searchActive{
+                                DisplaySearchResults(
+                                    searchResults: mainViewModel.searchedSiteList,
+                                    userLocation: locationManager.lastKnownLocation,
+                                    newSiteSelected: mainViewModel.newSiteSelected(siteMarker:selectedBySearch:),
+                                    searchActive: $mainViewModel.searchActive)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(Color(UIColor.secondarySystemGroupedBackground))
+                            }
+                            
+                            
                             
                             
                             MapViewControllerBridge(
@@ -43,7 +55,7 @@ struct ContentView: View {
                                 newMapLoad: $locationManager.newMapLoad,
                                 mapBottomPadding: displayedItemSize,
                                 selectedMarker: $mainViewModel.selectedMarker,
-                                siteSelectedBySearch: $mainViewModel.siteSelectedBySearch,
+                                siteSelectedBySearch: mainViewModel.siteSelectedBySearch,
                                 newSiteSelected: mainViewModel.newSiteSelected
                             )
                             
@@ -85,6 +97,8 @@ struct ContentView: View {
                                 }
                                 .padding(5)
                             }
+                            
+                            
                         }
                         .bottomSheet(
                             bottomSheetPosition: $mainViewModel.bottomSheetPercent,
@@ -122,7 +136,12 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .principal){
-                    CustomSearchBar(searchText: $mainViewModel.searchText, searchActive: $searchActive)
+                    if !mainViewModel.siteMarkers.isEmpty{
+                        CustomSearchBar(
+                            searchText: $mainViewModel.searchQuery,
+                            searchActive: $mainViewModel.searchActive
+                        )
+                    }
                     
                 }
             }

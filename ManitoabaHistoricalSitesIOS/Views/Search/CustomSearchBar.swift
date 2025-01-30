@@ -9,7 +9,6 @@
 import SwiftUI
 struct CustomSearchBar: View {
     @Binding var searchText: String
-    
     @Binding var searchActive: Bool
     
     var body: some View {
@@ -21,6 +20,8 @@ struct CustomSearchBar: View {
                                         searchActive = editing
                                     }
                 })
+                .lineLimit(1)
+                
             }
             .padding(7)
             .background(Color(.secondarySystemBackground))
@@ -31,6 +32,7 @@ struct CustomSearchBar: View {
             Button("Cancel") {
                 withAnimation {
                     searchActive = false
+                    
                 }
             }
             .opacity(searchActive ? 1 : 0)

@@ -15,6 +15,7 @@ struct DisplaySearchResults: View {
     var searchResults: [GMSMarker]
     var userLocation: CLLocationCoordinate2D
     var newSiteSelected: (GMSMarker, Bool) -> Void
+    @Binding var searchActive: Bool
     var body: some View {
         ScrollView{
             LazyVStack{
@@ -28,6 +29,8 @@ struct DisplaySearchResults: View {
                     .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                     .onTapGesture {
                         newSiteSelected(siteMarker, true)
+                        searchActive = false
+                        
                     }
                     Divider()
                         .background(Color.secondary)

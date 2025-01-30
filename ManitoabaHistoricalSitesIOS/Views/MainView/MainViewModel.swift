@@ -35,7 +35,32 @@ final class MainViewModel: ObservableObject{
     //Informes the map that the newly selected site was selected by the search bar
     @Published var siteSelectedBySearch: Bool = false
     
-    @Published var searchText:String = ""
+    //Search query
+    @Published var searchQuery:String = "" {
+        //When a new search value is set, filter list
+        didSet{
+            if !(textIsBlank(text: searchQuery)){
+                searchedSiteList = siteMarkers.filter{ $0.getNameAndAddress.uppercased().contains(searchQuery.uppercased())
+                }
+            }
+        }
+    }
+    
+    @Published var searchActive: Bool = false {
+        didSet{
+            //If the search text is blank, get default list
+            if searchActive && textIsBlank(text: searchQuery){
+                searchedSiteList = Array(siteMarkers.prefix(20))
+            }
+            
+            if !searchActive{
+                //Hides the keyboard
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+        }
+    }
+    
+    @Published var searchedSiteList: [GMSMarker] = []
     
     
     
@@ -156,6 +181,16 @@ final class MainViewModel: ObservableObject{
             displayState = SiteDisplayState.HalfSite
         }
 
+    }
+    
+   
+    
+    //Helper function to see if a string is blank or empty
+    private func textIsBlank(text: String) -> Bool {
+        if text.isEmpty{
+            return true
+        }
+        return text.trimmingCharacters(in: .whitespacesAndNewlines ) == ""
     }
     
 }
