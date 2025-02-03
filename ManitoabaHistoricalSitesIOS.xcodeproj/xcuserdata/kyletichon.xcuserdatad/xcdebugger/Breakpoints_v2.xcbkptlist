@@ -135,15 +135,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9063572E-67B5-49B1-80F2-1A6473178737"
+            uuid = "6E875641-F79E-45B3-9106-516A55088481"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ManitoabaHistoricalSitesIOS/Views/MainView/ContentView.swift"
+            filePath = "ManitoabaHistoricalSitesIOS/Views/Search/CustomSearchBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

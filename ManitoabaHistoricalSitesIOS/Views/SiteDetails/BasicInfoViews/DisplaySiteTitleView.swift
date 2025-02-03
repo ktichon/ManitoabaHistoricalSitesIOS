@@ -40,7 +40,7 @@ struct DisplaySiteTitleView: View {
             } label: {
                 Image(systemName: "xmark")
                     //.fontWeight(.bold)
-                    .font(.system(size: 50))
+                    .font(.system(size: 40))
                     .padding(5)
                     .foregroundStyle(Color.primary)
                 //Insures that the close button aligns to the top

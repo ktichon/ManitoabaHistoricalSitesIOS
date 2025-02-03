@@ -10,33 +10,40 @@ import SwiftUI
 struct CustomSearchBar: View {
     @Binding var searchText: String
     @Binding var searchActive: Bool
+    @FocusState var isFocused: Bool?
     
     var body: some View {
-        HStack {
-            HStack {
-                Image(systemName: "magnifyingglass")
-                TextField("Search", text: $searchText, onEditingChanged: { editing in
-                                    withAnimation {
-                                        searchActive = editing
-                                    }
-                })
-                .lineLimit(1)
-                
+        
+        TextField("Search for Historical Sites...",
+                  text: $searchText,
+                  onEditingChanged: { editting in
+            if editting{
+                searchActive = editting
             }
-            .padding(7)
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(10)
             
-            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
-            .padding(.horizontal, searchActive ? 0 : 50)
-            Button("Cancel") {
-                withAnimation {
-                    searchActive = false
-                    
-                }
-            }
-            .opacity(searchActive ? 1 : 0)
-            .frame(width: searchActive ? nil : 0)
-        }
+        })
+//        TextField("",
+//                  text: $searchText,
+//                  prompt: Text("Search for Historical Sites...")
+//            .foregroundColor(.gray)
+//                  
+//        )
+//        
+        
+        .lineLimit(1)
+        .padding(.horizontal, 5)
+        .padding(.vertical, 8)
+        .background(Color(.secondarySystemBackground))
+        .cornerRadius(50)
+        .overlay(RoundedRectangle(cornerRadius: 50).stroke(Color.gray, lineWidth: 1))
+        .padding(.horizontal, 0)
+        .padding(.vertical, 1)
+        
+        //Unfortunately, isFocused currently does not work inside a ToolbarItem item.
+        //So instead I have to use the decapriated onEditingChanged
+//        .focused($isFocused)
+//        .onChange(of: isFocused){ focus in
+//            searchActive = focus
+//        }
     }
 }

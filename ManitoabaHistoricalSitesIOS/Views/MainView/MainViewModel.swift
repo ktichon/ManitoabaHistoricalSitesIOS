@@ -56,6 +56,7 @@ final class MainViewModel: ObservableObject{
             if !searchActive{
                 //Hides the keyboard
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                searchQuery = ""
             }
         }
     }

@@ -15,7 +15,6 @@ struct ContentView: View {
     @ObservedObject private var mainViewModel : MainViewModel
     @StateObject private var locationManager = LocationManager()
     @State private var bottomSheetPercent : BottomSheetPosition = .hidden
-    @FocusState private var isFocused: Bool
     
 
     
@@ -35,16 +34,6 @@ struct ContentView: View {
                         //Gets item size using the % of the displayState value and the screen height
                         let displayedItemSize =  (mainViewModel.displayState.rawValue * geometry.size.height)
                         ZStack(alignment: .bottom){
-                            
-                            if mainViewModel.searchActive{
-                                DisplaySearchResults(
-                                    searchResults: mainViewModel.searchedSiteList,
-                                    userLocation: locationManager.lastKnownLocation,
-                                    newSiteSelected: mainViewModel.newSiteSelected(siteMarker:selectedBySearch:),
-                                    searchActive: $mainViewModel.searchActive)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(Color(UIColor.secondarySystemGroupedBackground))
-                            }
                             
                             
                             
@@ -98,7 +87,15 @@ struct ContentView: View {
                                 .padding(5)
                             }
                             
-                            
+                            if mainViewModel.searchActive{
+                                DisplaySearchResults(
+                                    searchResults: mainViewModel.searchedSiteList,
+                                    userLocation: locationManager.lastKnownLocation,
+                                    newSiteSelected: mainViewModel.newSiteSelected(siteMarker:selectedBySearch:),
+                                    searchActive: $mainViewModel.searchActive)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(Color(UIColor.secondarySystemGroupedBackground))
+                            }
                         }
                         .bottomSheet(
                             bottomSheetPosition: $mainViewModel.bottomSheetPercent,
@@ -135,6 +132,34 @@ struct ContentView: View {
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
+                ToolbarItem(placement: .cancellationAction){
+                    Button{
+                        if mainViewModel.searchActive {
+                            mainViewModel.searchActive = false
+                        }
+                        if mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite
+                        {
+                            mainViewModel.displayState = SiteDisplayState.FullMap
+                        }
+                        if mainViewModel.displayState == SiteDisplayState.MapWithLegend{
+                            mainViewModel.displayState = SiteDisplayState.FullMap
+                            mainViewModel.bottomSheetPercent = .hidden
+                        }
+                        
+                        
+                    } label: {
+                        
+                        if mainViewModel.searchActive || mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite || mainViewModel.displayState == SiteDisplayState.MapWithLegend{
+                            Image(systemName: "xmark")
+                                .foregroundStyle(Color.primary)
+    
+                        } else {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundStyle(Color.primary)
+                        }
+                        
+                    }
+                }
                 ToolbarItem(placement: .principal){
                     if !mainViewModel.siteMarkers.isEmpty{
                         CustomSearchBar(
