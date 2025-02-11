@@ -152,10 +152,12 @@ struct ContentView: View {
                         if mainViewModel.searchActive || mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite || mainViewModel.displayState == SiteDisplayState.MapWithLegend{
                             Image(systemName: "xmark")
                                 .foregroundStyle(Color.primary)
+                                .font(.system(size: 25))
     
                         } else {
                             Image(systemName: "magnifyingglass")
                                 .foregroundStyle(Color.primary)
+                                .font(.system(size: 25))
                         }
                         
                     }

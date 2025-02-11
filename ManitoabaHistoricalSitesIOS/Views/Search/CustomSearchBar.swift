@@ -31,7 +31,7 @@ struct CustomSearchBar: View {
 //        
         
         .lineLimit(1)
-        .padding(.horizontal, 5)
+        .padding(.horizontal, 15)
         .padding(.vertical, 8)
         .background(Color(.secondarySystemBackground))
         .cornerRadius(50)
