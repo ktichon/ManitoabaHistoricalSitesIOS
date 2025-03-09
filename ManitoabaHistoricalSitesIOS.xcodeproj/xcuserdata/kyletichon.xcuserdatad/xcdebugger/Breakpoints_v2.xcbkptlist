@@ -126,8 +126,8 @@
             filePath = "ManitoabaHistoricalSitesIOS/Views/MainView/MainViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "searchQuery"
             landmarkType = "24">
          </BreakpointContent>

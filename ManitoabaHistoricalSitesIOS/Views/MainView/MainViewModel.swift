@@ -9,7 +9,6 @@ import Foundation
 import Combine
 import GRDB
 import GoogleMaps
-import BottomSheet
 
 
 
@@ -27,7 +26,6 @@ final class MainViewModel: ObservableObject{
     @Published var sitePhotos: [SitePhotos] = []
     @Published var siteSources: [SiteSource] = []
     @Published var siteTypes: [String] = []
-    @Published var bottomSheetPercent: BottomSheetPosition = .hidden
     
     //Lets the map know when a new marker is selected
     //Used in searchBar
@@ -122,17 +120,10 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    //Called by ContentView to show the legend bottom sheet
-    func showLegendSheet() {
-        displayState = SiteDisplayState.MapWithLegend
-        bottomSheetPercent = .relative(SiteDisplayState.MapWithLegend.rawValue)
-    }
+    
     
     //Called when a new site is selected
     func newSiteSelected(siteMarker: GMSMarker, selectedBySearch: Bool) {
-        //Hide the legend sheet if it is open
-        bottomSheetPercent = .hidden
-        
         //Get the newSiteID from the marker
         if let newSiteId = siteMarker.userData as? Int {
             //Lets the map know whether or not the site marker was clicked on, allowing it to zoom in appropriately

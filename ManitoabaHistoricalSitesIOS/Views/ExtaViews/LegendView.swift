@@ -19,27 +19,29 @@ import SwiftUI
 struct LegendView: View {
     
     private let siteTypeId = Array( 2 ... 7)
-    private let flexibleColumn = Array(repeating: GridItem(.flexible()), count: 2)
+    //private let flexibleColumn = Array(repeating: GridItem(.flexible()), count: 2)
     var body: some View {
         VStack{
 //            Text("Legend")
 //                .font(.title2)
            
-            LazyVGrid(columns: flexibleColumn, spacing: 10){
+            ScrollView{
                 ForEach(siteTypeId, id: \.self){ siteType in
                     HStack(){
                         Image(
                             uiImage: MapIconFormatting.resizeImage(
                             //loads image based off of main type
                                 image: UIImage(named: MapIconFormatting.getTypeMarkerString(typeId: siteType))!,
-                            scaledToSize: CGSize(width: 55, height: 55))
+                            scaledToSize: CGSize(width: 60, height: 60))
                         )
                         
                         Text(SiteInfoFormatting.getTypeName(typeId: siteType))
+                            .font(.title)
                         Spacer()
                         
                         
                     }
+                    .padding(.horizontal, 20)
                     
                 }
             

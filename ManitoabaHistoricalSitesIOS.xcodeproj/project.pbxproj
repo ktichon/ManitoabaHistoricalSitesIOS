@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		11BF31722D01F1B100CBF24E /* GoogleMapsUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 11BF31712D01F1B100CBF24E /* GoogleMapsUtils */; };
-		11C13C922D1A10700055F295 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 11C13C912D1A10700055F295 /* BottomSheet */; };
 		11C41A852CD9B67000FCDE20 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 11C41A842CD9B67000FCDE20 /* GRDB */; };
 		11C41A872CD9B68800FCDE20 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 11C41A862CD9B68800FCDE20 /* GoogleMaps */; };
 /* End PBXBuildFile section */
@@ -73,7 +72,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C41A872CD9B68800FCDE20 /* GoogleMaps in Frameworks */,
-				11C13C922D1A10700055F295 /* BottomSheet in Frameworks */,
 				11C41A852CD9B67000FCDE20 /* GRDB in Frameworks */,
 				11BF31722D01F1B100CBF24E /* GoogleMapsUtils in Frameworks */,
 			);
@@ -139,7 +137,6 @@
 				11C41A842CD9B67000FCDE20 /* GRDB */,
 				11C41A862CD9B68800FCDE20 /* GoogleMaps */,
 				11BF31712D01F1B100CBF24E /* GoogleMapsUtils */,
-				11C13C912D1A10700055F295 /* BottomSheet */,
 			);
 			productName = ManitoabaHistoricalSitesIOS;
 			productReference = 11C41A552CD9B56700FCDE20 /* MHS Historical Sites.app */;
@@ -227,7 +224,6 @@
 				11C41A822CD9B5E400FCDE20 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				11C41A832CD9B67000FCDE20 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 				11BF31702D01F1B100CBF24E /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */,
-				11C13C902D1A10700055F295 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 11C41A562CD9B56700FCDE20 /* Products */;
@@ -622,14 +618,6 @@
 				minimumVersion = 6.1.0;
 			};
 		};
-		11C13C902D1A10700055F295 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/lucaszischka/BottomSheet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.1.1;
-			};
-		};
 		11C41A822CD9B5E400FCDE20 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
@@ -653,11 +641,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 11BF31702D01F1B100CBF24E /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */;
 			productName = GoogleMapsUtils;
-		};
-		11C13C912D1A10700055F295 /* BottomSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 11C13C902D1A10700055F295 /* XCRemoteSwiftPackageReference "BottomSheet" */;
-			productName = BottomSheet;
 		};
 		11C41A842CD9B67000FCDE20 /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;

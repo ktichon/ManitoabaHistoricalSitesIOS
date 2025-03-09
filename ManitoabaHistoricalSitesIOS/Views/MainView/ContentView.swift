@@ -8,13 +8,11 @@
 import SwiftUI
 import GoogleMaps
 import GRDB
-import BottomSheet
 
 struct ContentView: View {
     
     @ObservedObject private var mainViewModel : MainViewModel
     @StateObject private var locationManager = LocationManager()
-    @State private var bottomSheetPercent : BottomSheetPosition = .hidden
     
 
     
@@ -68,9 +66,7 @@ struct ContentView: View {
                             
                             //Button to show legend
                             if(mainViewModel.displayState == SiteDisplayState.FullMap){
-                                Button{
-                                    mainViewModel.showLegendSheet()
-                                } label: {
+                                NavigationLink( destination: LegendView()){
                                     Text("Legend")
                                         .foregroundStyle(Color.primary)
                                         .font(.title3.bold())
@@ -82,9 +78,10 @@ struct ContentView: View {
                                                 
                                             
                                         )
+                                        .padding(5)
+                                        .navigationTitle("Legend")
                                         
                                 }
-                                .padding(5)
                             }
                             
                             if mainViewModel.searchActive{
@@ -97,31 +94,6 @@ struct ContentView: View {
                                 .background(Color(UIColor.secondarySystemGroupedBackground))
                             }
                         }
-                        .bottomSheet(
-                            bottomSheetPosition: $mainViewModel.bottomSheetPercent,
-                            switchablePositions: [.relative(SiteDisplayState.MapWithLegend.rawValue), .hidden],
-                            headerContent: {
-                            
-                                Spacer()
-                                Text("Legend")
-                                    .font(.title2)
-                                    .bold()
-                                    .padding([.trailing, .leading])
-                                Spacer()
-                                
-                            }
-                                     
-                            )
-                        {
-                            LegendView()
-                        }
-                        //.isResizable(false)
-                        .enableTapToDismiss(true)
-                        .showCloseButton(true)
-                        .enableSwipeToDismiss(true)
-                        .onDismiss {
-                            mainViewModel.displayState = .FullMap
-                        }
                     }
         
                 }
@@ -133,34 +105,39 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .cancellationAction){
-                    Button{
-                        if mainViewModel.searchActive {
-                            mainViewModel.searchActive = false
-                        }
-                        if mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite
-                        {
-                            mainViewModel.displayState = SiteDisplayState.FullMap
-                        }
-                        if mainViewModel.displayState == SiteDisplayState.MapWithLegend{
-                            mainViewModel.displayState = SiteDisplayState.FullMap
-                            mainViewModel.bottomSheetPercent = .hidden
-                        }
-                        
-                        
-                    } label: {
-                        
-                        if mainViewModel.searchActive || mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite || mainViewModel.displayState == SiteDisplayState.MapWithLegend{
-                            Image(systemName: "xmark")
+                    if mainViewModel.searchActive {
+                        Button{
+                            if mainViewModel.searchActive {
+                                mainViewModel.searchActive = false
+                            }
+                            /*
+                             if mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite
+                             {
+                                 mainViewModel.displayState = SiteDisplayState.FullMap
+                             }
+                             */
+                            
+                        } label: {
+                            Image(systemName: "chevron.left")
                                 .foregroundStyle(Color.primary)
                                 .font(.system(size: 25))
-    
-                        } else {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundStyle(Color.primary)
-                                .font(.system(size: 25))
+                            /*
+                            if mainViewModel.searchActive || mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite || mainViewModel.displayState == SiteDisplayState.MapWithLegend{
+                                Image(systemName: "xmark")
+                                    .foregroundStyle(Color.primary)
+                                    .font(.system(size: 25))
+        
+                            } else {
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundStyle(Color.primary)
+                                    .font(.system(size: 25))
+                            }
+                             */
+                            
                         }
                         
                     }
+                    
                 }
                 ToolbarItem(placement: .principal){
                     if !mainViewModel.siteMarkers.isEmpty{

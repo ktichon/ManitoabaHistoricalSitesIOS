@@ -1,15 +1,6 @@
 {
-  "originHash" : "0cca6624e65090aa37bb4bb4ac16449a429e3744c41c9fdac33583d51b735ab9",
+  "originHash" : "373e020141dd7281044742f048f4c7aad843115d0aceb278e8080c736091f302",
   "pins" : [
-    {
-      "identity" : "bottomsheet",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/lucaszischka/BottomSheet",
-      "state" : {
-        "revision" : "720ddbd1371fef2a09cc1ab65fc503df37767f9c",
-        "version" : "3.1.1"
-      }
-    },
     {
       "identity" : "google-maps-ios-utils",
       "kind" : "remoteSourceControl",
