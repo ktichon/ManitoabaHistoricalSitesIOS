@@ -14,7 +14,7 @@ struct CustomSearchBar: View {
     
     var body: some View {
         
-        TextField("Search for Historical Sites...",
+        TextField("Search for Historic Sites...",
                   text: $searchText,
                   onEditingChanged: { editting in
             if editting{
