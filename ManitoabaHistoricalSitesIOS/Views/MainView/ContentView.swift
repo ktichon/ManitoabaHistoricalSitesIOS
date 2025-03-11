@@ -79,7 +79,7 @@ struct ContentView: View {
                                             
                                         )
                                         .padding(5)
-                                        .navigationTitle("Legend")
+                                        .navigationTitle("Back")
                                         
                                 }
                             }
@@ -119,7 +119,7 @@ struct ContentView: View {
                             
                         } label: {
                             Image(systemName: "chevron.left")
-                                .foregroundStyle(Color.primary)
+                                .foregroundStyle(Color.accentColor)
                                 .font(.system(size: 25))
                             /*
                             if mainViewModel.searchActive || mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite || mainViewModel.displayState == SiteDisplayState.MapWithLegend{
@@ -151,6 +151,7 @@ struct ContentView: View {
             }
             
         }
+       
         
     }
 }

@@ -22,8 +22,8 @@ struct LegendView: View {
     //private let flexibleColumn = Array(repeating: GridItem(.flexible()), count: 2)
     var body: some View {
         VStack{
-//            Text("Legend")
-//                .font(.title2)
+            Text("Legend")
+                .font(.title)
            
             ScrollView{
                 ForEach(siteTypeId, id: \.self){ siteType in
@@ -32,11 +32,11 @@ struct LegendView: View {
                             uiImage: MapIconFormatting.resizeImage(
                             //loads image based off of main type
                                 image: UIImage(named: MapIconFormatting.getTypeMarkerString(typeId: siteType))!,
-                            scaledToSize: CGSize(width: 60, height: 60))
+                            scaledToSize: CGSize(width: 55, height: 55))
                         )
                         
                         Text(SiteInfoFormatting.getTypeName(typeId: siteType))
-                            .font(.title)
+                            .font(.title3)
                         Spacer()
                         
                         
