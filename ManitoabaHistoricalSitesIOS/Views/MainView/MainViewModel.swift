@@ -64,6 +64,9 @@ final class MainViewModel: ObservableObject{
     
     
     
+    
+    
+    
     init( database: HistoricalSiteDatabase) {
         //Sets the property values
         self.currentSite = HistoricalSite()

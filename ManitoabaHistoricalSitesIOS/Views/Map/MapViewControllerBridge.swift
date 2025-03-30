@@ -116,8 +116,14 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
             }
             //Set the selected marker on the map to nil, to hide the marker info window
             uiViewController.map.selectedMarker = nil
+            
             //Sets the binded varible to nil, so that this triggers when a marker is first selected
-            selectedMarker = nil
+            //For some reason, there is a glich with IOS 17 where setting the selected marker to nill would cause the marker to disapear from the map. Adding this delay of .5 seconds causes the marker to show up again
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                selectedMarker = nil
+            }
+            
+            
             
         }
     }

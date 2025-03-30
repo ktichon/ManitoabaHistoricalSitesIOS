@@ -14,6 +14,10 @@ struct ContentView: View {
     @ObservedObject private var mainViewModel : MainViewModel
     @StateObject private var locationManager = LocationManager()
     
+    
+    @State private var searchText = ""
+    @State private var searchIsActive = false
+    
 
     
 
@@ -23,7 +27,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack {
                 if mainViewModel.siteMarkers.isEmpty {
                     ProgressView("Loading all Historic Sites ...")
@@ -48,6 +52,7 @@ struct ContentView: View {
                             
                             
                             
+                            
                             //Show site info
                             if (mainViewModel.displayState == SiteDisplayState.FullSite  || mainViewModel.displayState == SiteDisplayState.HalfSite){
                                 
@@ -66,7 +71,8 @@ struct ContentView: View {
                             
                             //Button to show legend
                             if(mainViewModel.displayState == SiteDisplayState.FullMap){
-                                NavigationLink( destination: LegendView()){
+                                
+                                NavigationLink(destination: LegendView()){
                                     Text("Legend")
                                         .foregroundStyle(Color.primary)
                                         .font(.title3.bold())
@@ -74,14 +80,12 @@ struct ContentView: View {
                                         .background(
                                             Capsule()
                                                 .strokeBorder(Color.primary, lineWidth: 1)
-                                                .background(Capsule().fill(Color(UIColor.tertiarySystemBackground)))
-                                                
-                                            
+                                                 .background(Capsule().fill(Color(UIColor.tertiarySystemBackground)))
                                         )
-                                        .padding(5)
                                         .navigationTitle("Back")
-                                        
                                 }
+                                .padding(5)
+                                
                             }
                             
                             if mainViewModel.searchActive{
@@ -101,44 +105,11 @@ struct ContentView: View {
                 
                 
             }
+            .padding([.top], 10)
+            
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
-                ToolbarItem(placement: .cancellationAction){
-                    if mainViewModel.searchActive {
-                        Button{
-                            if mainViewModel.searchActive {
-                                mainViewModel.searchActive = false
-                            }
-                            /*
-                             if mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite
-                             {
-                                 mainViewModel.displayState = SiteDisplayState.FullMap
-                             }
-                             */
-                            
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .foregroundStyle(Color.accentColor)
-                                .font(.system(size: 25))
-                            /*
-                            if mainViewModel.searchActive || mainViewModel.displayState == SiteDisplayState.HalfSite || mainViewModel.displayState == SiteDisplayState.FullSite || mainViewModel.displayState == SiteDisplayState.MapWithLegend{
-                                Image(systemName: "xmark")
-                                    .foregroundStyle(Color.primary)
-                                    .font(.system(size: 25))
-        
-                            } else {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundStyle(Color.primary)
-                                    .font(.system(size: 25))
-                            }
-                             */
-                            
-                        }
-                        
-                    }
-                    
-                }
                 ToolbarItem(placement: .principal){
                     if !mainViewModel.siteMarkers.isEmpty{
                         CustomSearchBar(
@@ -148,6 +119,31 @@ struct ContentView: View {
                     }
                     
                 }
+                ToolbarItem(placement: .topBarTrailing){
+                    
+                    if mainViewModel.searchActive {
+                        Button{
+                            mainViewModel.searchActive.toggle()
+                        } label: {
+                            Image(systemName: "xmark")
+                                .foregroundStyle(Color.accentColor)
+                                .font(.system(size: 25))
+                        }
+                        
+                    } else {
+                        Menu{
+                            NavigationLink(destination: Text("About Page")){
+                                Text("About")
+                        }
+                            
+                        } label: {
+                            Image(systemName: "line.horizontal.3")
+                                .font(.system(size: 25))
+                        }
+                    }
+                    
+                }
+                
             }
             
         }
