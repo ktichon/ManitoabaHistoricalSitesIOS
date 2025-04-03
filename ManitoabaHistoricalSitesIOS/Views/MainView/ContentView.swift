@@ -62,6 +62,7 @@ struct ContentView: View {
                                     siteTypes: mainViewModel.siteTypes,
                                     userLocation: locationManager.lastKnownLocation,
                                     sitePhotos: mainViewModel.sitePhotos,
+                                    siteTables: mainViewModel.siteTables,
                                     sourceList: mainViewModel.siteSources)
                                 .frame(height: displayedItemSize)
                                 //Sets the background colour to default
@@ -132,7 +133,7 @@ struct ContentView: View {
                         
                     } else {
                         Menu{
-                            NavigationLink(destination: Text("About Page")){
+                            NavigationLink(destination: AboutView()){
                                 Text("About")
                         }
                             

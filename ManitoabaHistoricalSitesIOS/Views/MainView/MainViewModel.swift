@@ -26,6 +26,7 @@ final class MainViewModel: ObservableObject{
     @Published var sitePhotos: [SitePhotos] = []
     @Published var siteSources: [SiteSource] = []
     @Published var siteTypes: [String] = []
+    @Published var siteTables: [SiteTable] = []
     
     //Lets the map know when a new marker is selected
     //Used in searchBar
@@ -141,7 +142,9 @@ final class MainViewModel: ObservableObject{
                 //Clears the fetched info from the last selected site
                 self.siteTypes = []
                 self.sitePhotos = []
+                self.siteTables = []
                 self.siteSources = []
+                
                 
                 //Get the site by the siteId
                 //And fetch the related info for the site from the SitePhotos, SiteSources, and SiteWithType
@@ -157,8 +160,12 @@ final class MainViewModel: ObservableObject{
                         //Photos
                         self.sitePhotos = try SitePhotos.filter(Column("siteId") == newSiteId).fetchAll(db)
                         
+                        //Tables
+                        self.siteTables = try SiteTable.filter(Column("siteId") == newSiteId).fetchAll(db)
+                        
                         //Sources
                         self.siteSources = try SiteSource.filter(Column("siteId") == newSiteId).fetchAll(db)
+                        
                         
                         //Site Types
                         let siteTypesSQL = "SELECT type FROM siteType INNER JOIN siteWithType ON siteWithType.siteTypeId = siteType.id WHERE siteWithType.siteId = ?"

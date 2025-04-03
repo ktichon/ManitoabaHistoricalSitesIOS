@@ -14,6 +14,7 @@ struct DisplaySiteInfoView: View {
     var siteTypes: [String]
     var userLocation: CLLocationCoordinate2D
     var sitePhotos: [SitePhotos]
+    var siteTables: [SiteTable]
     var sourceList: [SiteSource]
     
     
@@ -61,6 +62,13 @@ struct DisplaySiteInfoView: View {
                             DisplayDescriptionView(
                                 description: siteDescription)
                             .padding(paddingBetweenItems)
+                        }
+                        
+                        if !siteTables.isEmpty{
+                            ForEach(siteTables, id: \.id) { table in
+                                DisplayTableView(siteTable: table)
+                                .padding(paddingBetweenItems)
+                            }
                         }
                         
                         DisplaySiteSourcesView(sourcesList: sourceList)

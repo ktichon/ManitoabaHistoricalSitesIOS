@@ -25,27 +25,29 @@ struct LegendView: View {
             Text("Legend")
                 .font(.title)
            
-            ScrollView{
-                ForEach(siteTypeId, id: \.self){ siteType in
-                    HStack(){
-                        Image(
-                            uiImage: MapIconFormatting.resizeImage(
-                            //loads image based off of main type
-                                image: UIImage(named: MapIconFormatting.getTypeMarkerString(typeId: siteType))!,
-                            scaledToSize: CGSize(width: 55, height: 55))
-                        )
-                        
-                        Text(SiteInfoFormatting.getTypeName(typeId: siteType))
-                            .font(.title3)
-                        Spacer()
-                        
-                        
-                    }
-                    .padding(.horizontal, 20)
+            ForEach(siteTypeId, id: \.self){ siteType in
+                HStack(){
+                    Image(
+                        uiImage: MapIconFormatting.resizeImage(
+                        //loads image based off of main type
+                            image: UIImage(named: MapIconFormatting.getTypeMarkerString(typeId: siteType))!,
+                        scaledToSize: CGSize(width: 55, height: 55))
+                    )
+                    
+                    Text(SiteInfoFormatting.getTypeName(typeId: siteType))
+                        .font(.title3)
+                    Spacer()
+                    
                     
                 }
-            
+                .padding(.horizontal, 20)
+                
             }
+            Text("Historic Sites of Manitoba, by the [Manitoba Historical Society](https://www.mhs.mb.ca)")
+                .font(.title2)
+                .padding(.horizontal, 70)
+                .padding(.vertical, 100)
+                .multilineTextAlignment(.center)
         }
         
         

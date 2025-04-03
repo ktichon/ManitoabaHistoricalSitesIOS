@@ -35,9 +35,8 @@ class SiteInfoFormatting {
             return "Error getting site type"
         }
     }
-    
-    
-    
+        
+
     //turns CLLocationCoordinate2D into CLLocation
     static func turnCoordinateToLocation(coord: CLLocationCoordinate2D) -> CLLocation{
         return CLLocation(latitude: coord.latitude, longitude: coord.longitude)
@@ -79,23 +78,17 @@ class SiteInfoFormatting {
 
     }
     
+    //Gets the rows of the table
+    static func splitTableDataIntoRows(tableData: String) -> [String]{
+        return tableData.components(separatedBy: " _&_ ")
+    }
+    
+    //Gets the columns in the row
+    static func splitRowDataIntoColumn(rowData: String) -> [String]{
+        return rowData.components(separatedBy: " _@_ ")
+    }
+    
    
     
-}
-
-// Extentiong that turns string into AttributedString
-extension StringProtocol {
-    func htmlToAttributedString() throws -> AttributedString {
-        try .init(
-            .init(
-                data: .init(utf8),
-                options: [
-                    .documentType: NSAttributedString.DocumentType.html,
-                    .characterEncoding: String.Encoding.utf8.rawValue
-                ],
-                documentAttributes: nil
-            )
-        )
-    }
 }
 
